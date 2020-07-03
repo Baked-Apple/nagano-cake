@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :members
   namespace :public do
-    root 'home#top'
-    get '/about' => 'home#about'
+    get 'top' => 'home#top'
+    get 'about' => 'home#about'
     get 'confirm' => 'members#confirm'
     get 'mypage' => 'members#show'
     get 'mypage/edit' => 'members#edit'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root 'home#top'
+    get 'top' => 'home#top'
     resources :orders, only: [:index, :show, :update]
     patch 'order_items/:id' => 'order_items#update'
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
