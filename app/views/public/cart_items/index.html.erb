@@ -1,0 +1,63 @@
+<header>
+	<%= render 'public/header' %>
+</header><!-- /header -->
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-4">
+			<h2>ショッピングカート</h2>
+		</div>
+		<div class="col-md-4 ml-auto">
+			<%= link_to "カートを空にする", public_cart_item_path(@cart_items), method: :delite, class: "btn btn-danger" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10 offset-md-1">
+			<table border="1" style="border-collapse: collapse">
+				<thead>
+					<tr>
+						<th>商品名</th>
+						<th>単価(税込)</th>
+						<th>数量</th>
+						<th>小計</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= cart_item.item.name %></td>
+						<td><%= cart_item.item.price %></td>
+						<td>
+							<%= link_to "変更", "#", method: :patch, class: "btn btn-info" %>
+						</td>
+						<td><%= cart_item.quantity %></td>
+						<td><%= link_to "削除する", "#", method: :delite, class: "btn btn-danger" %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<%= link_to "買い物を続ける", "#", class: "btn btn-info" %>
+		</div>
+		<div class="col-md-4 ml-auto">
+			<table border="1" style="border-collapse: collapse">
+				<tr>
+					<th>合計金額</th>
+					<td>00</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<%= link_to "情報入力に進む", "#", class: "btn btn-success" %>
+		</div>
+	</div>
+</div>
