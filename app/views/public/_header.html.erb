@@ -1,0 +1,26 @@
+<nav class="navi">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3 class="title">LOGO</h3>
+      </div>
+      <div class="col-xs-6">
+        <div class="nav">
+          <ul>
+            <% if member_signed_in? %>
+            　<li><%= link_to 'マイページ', public_mypage_path(current_member) %></li>
+              <li><%= link_to '商品一覧', public_items_path %></li>
+              <li><%= link_to 'カート', public_cart_items_path %></li>
+              <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
+            <% else %>
+            　<li><%= link_to 'About', public_about_path %></li>
+              <li><%= link_to '商品一覧', public_items_path %></li>
+              <li><%= link_to '新規登録', new_member_registration_path %></li>
+              <li><%= link_to 'ログイン', new_member_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
