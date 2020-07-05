@@ -1,0 +1,20 @@
+<h3>注文情報入力</h3>
+
+<%= form_with scope: :post, url: public_orders_confirm_path do |f| %>
+	<%= f.label "支払方法" %><br>
+	<%= f.select :pay_type, [["クレジットカード", 1], ["銀行振込", 2]], { include_blank: false, selected: 1 } %><br>
+	<%= f.label "お届け先" %><br>
+	<%= f.radio_button :delivery, :member_address, checked: true %>
+	<%= f.label :delivery, "ご自身の住所", {value: :member_address, style: "display: inline-block;"} %><br>
+	<%= f.radio_button :delivery, :derivery_address %>
+	<%= f.label :delivery, "登録済住所から選択", {value: :derivery_address, style: "display: inline-block;"} %><br>
+	<%= f.radio_button :delivery, :new_address %>
+	<%= f.label :delivery, "新しいお届け先", {value: :new_address, style: "display: inline-block;"} %><br>
+	<%= f.label "郵便番号(ハイフンなし)" %>
+	<%= f.text_field :postal_code %><br>
+	<%= f.label "住所" %>
+	<%= f.text_field :address %><br>
+	<%= f.label "宛名" %>
+	<%= f.text_field :delivery_name %><br>
+	<%= f.submit "確認画面へ進む" %>
+<% end %>
