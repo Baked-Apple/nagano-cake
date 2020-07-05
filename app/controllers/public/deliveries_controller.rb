@@ -6,17 +6,32 @@ class Public::DeliveriesController < ApplicationController
 
 	def create
 		@delivery = Delivery.new(delivery_params)
-		@delivery.save
-		redirect_to public_deliveries_path
+		@delivery.member_id = current_member.id
+		if @delivery.save
+			redirect_to public_deliveries_path
+		else
+			@deliveries = Delivery.all
+			render :index
+		end
 	end
 
 	def edit
+		@delivery = Delivery.find(params[:id])
 	end
 
 	def update
+		@delivery = Delivery.find(params[:id])
+		if @delivery.update(delivery_params)
+			redirect_to public_deliveries_path
+		else
+			render :edit
+		end
 	end
 
 	def destroy
+		delivery = Delivery.find(params[:id])
+		delivery.destroy
+		redirect_to public_deliveries_path
 	end
 
 	private
