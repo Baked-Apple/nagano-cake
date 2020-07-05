@@ -1,0 +1,18 @@
+<div class="row">
+<div class="col-xs-6">
+<%= form_for(@genre, url: {controller: 'admin/genres', action: 'update' }) do |f| %>
+				
+				<%= f.label "ジャンル名" %>
+				<%= f.text_field :genre %>
+
+				<%= f.label "有効" %>
+    			<%= f.check_box :invalid_status, {}, "true", "false" %>
+
+    			<%= f.label "無効" %>
+    			<%= f.check_box :invalid_status, {}, "false", "true" %>
+
+    			<%= f.submit '変更を保存する' %>
+
+<% end %>
+</div>
+</div>
