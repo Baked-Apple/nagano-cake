@@ -1,2 +1,27 @@
 class Public::MembersController < ApplicationController
+	def show
+		@member = current_member
+	end
+
+	def edit
+		@member = current_member
+	end
+
+	def update
+		@member = current_member
+		if @member.update(member_params)
+			redirect_to public_mypage_path(current_member)
+		else
+			render :edit
+		end
+    end
+
+    def confirm
+    end
+
+    private
+    def member_params
+       params.require(:member).permit(:last_name, :first_name, :kana_last_name, :kana_first_name, :postal_code, :address, :phone_number, :email, :leave_status)
+    end
+
 end

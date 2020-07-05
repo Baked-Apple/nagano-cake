@@ -1,0 +1,22 @@
+<h3>会員一覧</h3>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+    <tr>
+    	<td><%= member.id %></td>
+        <td><%= member.last_name %><%= member.first_name %></td>
+        <td><%= member.email %></td>
+        <td><%= member.leave_status %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,42 @@
+<h3>マイページ</h3>
+
+<div>
+	<h4 class="col-xs-2">登録情報</h4>
+	<%= link_to '編集する', public_mypage_edit_path(current_member),class:"btn btn-primary col-xs-5" %>
+	<%= link_to 'パスワードを変更する', edit_member_registration_path(current_member),class:"btn btn-primary col-xs-5" %>
+</div>
+
+<table class='table'>
+	<tr>
+		<th>氏名</th>
+		<th><%= @member.last_name %><%= @member.first_name %></th>
+	</tr>
+	<tr>
+		<th>フリガナ</th>
+		<th><%= @member.kana_last_name %><%= @member.kana_first_name %></th>
+	</tr>
+	<tr>
+		<th>郵便番号</th>
+		<th><%= @member.postal_code %></th>
+	</tr>
+	<tr>
+		<th>住所</th>
+		<th><%= @member.address %></th>
+	</tr>
+	<tr>
+		<th>電話番号</th>
+		<th><%= @member.phone_number %></th>
+	</tr>
+	<tr>
+		<th>メールアドレス</th>
+		<th><%= @member.email %></th>
+	</tr>
+</table>
+
+<p>配送先<%= link_to "一覧を見る",public_items_path, class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+
+<p>注文履歴<%= link_to "一覧を見る",public_orders_path, class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></p>
+
+
+
+

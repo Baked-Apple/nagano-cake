@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :members
+
+  devise_for :members, controllers:{
+    sessions: 'public/sessions',
+    passwords: 'public/passwords',
+    registrations: 'public/registrations'
+  }
+
+  devise_for :admins, controllers:{
+    sessions: 'admin/sessions',
+    passwords: 'admin/passwords',
+    registrations: 'admin/registrations'
+  }
+
   namespace :public do
     get 'top' => 'home#top'
     get 'about' => 'home#about'
