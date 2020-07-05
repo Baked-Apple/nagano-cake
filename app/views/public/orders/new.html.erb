@@ -4,11 +4,13 @@
 	<%= f.label "支払方法" %><br>
 	<%= f.select :pay_type, [["クレジットカード", 1], ["銀行振込", 2]], { include_blank: false, selected: 1 } %><br>
 	<%= f.label "お届け先" %><br>
-	<%= f.radio_button :delivery, :member_address, checked: true %>
+	<%= f.radio_button :delivery, 1, checked: true %>
 	<%= f.label :delivery, "ご自身の住所", {value: :member_address, style: "display: inline-block;"} %><br>
-	<%= f.radio_button :delivery, :derivery_address %>
+	<%= hidden_field_tag :address, current_member.address %><br>
+	<%= f.radio_button :delivery, 2 %>
 	<%= f.label :delivery, "登録済住所から選択", {value: :derivery_address, style: "display: inline-block;"} %><br>
-	<%= f.radio_button :delivery, :new_address %>
+	<%= f.collection_select :derivery_address, Delivery.all, :id, prompt: "選択してください", class: 'form-control' %><br>
+	<%= f.radio_button :delivery, 3 %>
 	<%= f.label :delivery, "新しいお届け先", {value: :new_address, style: "display: inline-block;"} %><br>
 	<%= f.label "郵便番号(ハイフンなし)" %>
 	<%= f.text_field :postal_code %><br>
