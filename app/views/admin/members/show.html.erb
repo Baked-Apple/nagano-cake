@@ -1,0 +1,34 @@
+<h3><%= @member.last_name %><%= @member.first_name %>の会員詳細</h3>
+
+<table class='table'>
+	<tr>
+		<th>顧客ID</th>
+		<th><%= @member.id %><%= @member.leave_status %></th>
+	<tr>
+		<th>氏名</th>
+		<th><%= @member.last_name %><%= @member.first_name %></th>
+	</tr>
+	<tr>
+		<th>フリガナ</th>
+		<th><%= @member.kana_last_name %><%= @member.kana_first_name %></th>
+	</tr>
+	<tr>
+		<th>郵便番号</th>
+		<th><%= @member.postal_code %></th>
+	</tr>
+	<tr>
+		<th>住所</th>
+		<th><%= @member.address %></th>
+	</tr>
+	<tr>
+		<th>電話番号</th>
+		<th><%= @member.phone_number %></th>
+	</tr>
+	<tr>
+		<th>メールアドレス</th>
+		<th><%= @member.email %></th>
+	</tr>
+</table>
+
+<%= link_to '編集する', edit_admin_member_path(@member),class:"btn btn-primary col-xs-5" %>
+<%= link_to '注文履歴一覧を見る', admin_orders_path,class:"btn btn-primary col-xs-5" %>
