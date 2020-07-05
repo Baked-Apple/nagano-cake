@@ -1,0 +1,37 @@
+<header>
+	<%= render 'admin/header' %>
+</header><!-- /header -->
+
+<div class="row">
+	
+	<div class="container">
+
+		<div class="col-xs-4">
+
+			<h2>商品詳細</h2>
+
+			
+			
+		</div>
+
+		<div class="col-xs-8">
+			<h4>商品名</h4>
+			<%= @item.name %>
+
+			<h4>商品説明</h4>
+			<%= @item.introduction %>
+
+			<h4>ジャンル</h4>
+			<%= @item.genre_id %>
+
+			<h4>税込み価格（税抜価格）</h4>
+			<%= @item.price * 1.08 %>
+			<%= @item.price %>
+
+			<h4>販売ステータス</h4>
+			<%= @item.sale_status %>			
+		</div>
+		
+	</div>
+	
+</div>
