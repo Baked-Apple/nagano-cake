@@ -11,9 +11,7 @@
 
 			<%= form_for(@item, url: admin_items_path) do |f| %>
 
-				<div class="item-image">
-        			<%= attachment_image_tag @item, :image, :fill, 100, 100, class: "img-circle pull-left profile-thumb", fallback: "japan.jpg"%>
-    			</div>
+				
 				<%= f.attachment_field :image %>
 
 			
@@ -29,7 +27,16 @@
 					<%= f.text_area :introduction %>
 
 					<%= f.label "ジャンル" %>
-					<%= f.select :genre, {'ケーキ': 1, '和菓子': 2}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+					<%= f.select :genre_id, {'ケーキ': 1, '和菓子': 2, '焼き菓子': 3}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+
+					<%= f.label "税抜価格" %>
+					<%= f.text_field :price %>
+
+					<%= f.label "販売ステータス" %>
+					<%= f.select :sale_status, {'販売中': 0, '売り切れ': 1}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+
+					<%= f.submit '新規登録' %>
+
 			
 				</div>
 			<% end %>
