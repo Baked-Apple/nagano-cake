@@ -18,7 +18,7 @@ class Public::OrdersController < ApplicationController
   # 注文確認画面
   def confirm
     @cart_items = CartItem.all
-    @order = Order.new(order_params)
+    @order = Order.new
     return if @order.valid?
     render :new
   end
