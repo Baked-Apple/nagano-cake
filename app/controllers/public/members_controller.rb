@@ -19,6 +19,16 @@ class Public::MembersController < ApplicationController
     def confirm
     end
 
+    def hide
+    	@member = current_member
+    	# 退会ステータスをtrue＝退会済みにupdate
+    	@member.update(leave_status: true)
+    	# #ログアウトさせる
+    	reset_session
+    	#トップページにリダイレクト(後でルートパスに変更)
+    	redirect_to public_top_path
+    end
+
     private
     def member_params
        params.require(:member).permit(:last_name, :first_name, :kana_last_name, :kana_first_name, :postal_code, :address, :phone_number, :email, :leave_status)

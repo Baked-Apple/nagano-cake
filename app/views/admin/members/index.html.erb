@@ -15,7 +15,13 @@
     	<td><%= member.id %></td>
         <td><%= member.last_name %><%= member.first_name %></td>
         <td><%= member.email %></td>
-        <td><%= member.leave_status %></td>
+        <td>
+          <% if member.leave_status == 1 %>
+          <p>退会済み</p>
+          <% else %>
+          <p>有効</p>
+          <% end %>
+        </td>
     </tr>
     <% end %>
   </tbody>
