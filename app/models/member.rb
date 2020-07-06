@@ -7,10 +7,9 @@ class Member < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
-
-  #ログイン時に退会済みの会員を弾くメソッド
-  # def active_for_authentication?
-  #   super && (self.leave_status == false)
-  # end
+  #退会ステータス０＝有効のみログイン可
+  def active_for_authentication?
+    super && (self.leave_status == 0)
+  end
 
 end
