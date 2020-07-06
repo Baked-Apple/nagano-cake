@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get 'mypage/edit' => 'members#edit'
     patch 'mypage' => 'members#update'
     get 'orders/confirm' => 'orders#confirm'
+    post 'orders/confirm' => 'orders#confirm'
     get 'orders/thanks' => 'orders#thanks'
   	resources :orders, only: [:new, :index, :show, :create]
     resources :items, only: [:index, :show, :create]
