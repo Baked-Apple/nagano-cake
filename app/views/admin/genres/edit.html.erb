@@ -6,10 +6,10 @@
 				<%= f.text_field :genre %>
 
 				<%= f.label "有効" %>
-    			<%= f.check_box :invalid_status, {}, "true", "false" %>
+    			<%= f.check_box :invalid_status, {} %>
 
     			<%= f.label "無効" %>
-    			<%= f.check_box :invalid_status, {}, "false", "true" %>
+    			<%= f.check_box :invalid_status, {} %>
 
     			<%= f.submit '変更を保存する' %>
 

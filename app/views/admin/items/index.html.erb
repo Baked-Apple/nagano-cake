@@ -16,6 +16,21 @@
 						<th colspan="3"></th>
 					</tr>
 				</thead>
+
+				<tbody>
+					<!-- 商品一覧情報 -->
+					<% @items.each do |item| %>
+						<tr>
+							<td><%= item.id %></td>
+							<td><%= item.name %></td>
+							<td><%= item.price %></td>
+							<td><%= item.genre_id %></td>
+							<td><%= item.sale_status %></td>
+						
+						</tr>
+					<% end %>
+				</tbody>
+
 			</table>
 		</div>
 	</div>
