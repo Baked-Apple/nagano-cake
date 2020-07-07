@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'top' => 'home#top'
     get 'about' => 'home#about'
     get 'confirm' => 'members#confirm'
+    put 'confirm' => 'members#hide'
     get 'mypage' => 'members#show'
     get 'mypage/edit' => 'members#edit'
     patch 'mypage' => 'members#update'
