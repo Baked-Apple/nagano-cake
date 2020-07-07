@@ -3,7 +3,11 @@
 <table class='table'>
 	<tr>
 		<th>顧客ID</th>
-		<th><%= @member.id %><%= @member.leave_status %></th>
+		<th><%= @member.id %><% if @member.leave_status == 1 %>
+			<p>退会済み</p>
+          <% else %>
+          <p>有効会員</p>
+          <% end %></th>
 	<tr>
 		<th>氏名</th>
 		<th><%= @member.last_name %><%= @member.first_name %></th>

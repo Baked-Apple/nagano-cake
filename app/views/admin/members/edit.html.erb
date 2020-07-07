@@ -39,11 +39,16 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+  <!-- ステータス：1 = 退会済み 0 = 有効 -->
   <div class="form-group">
     <%= f.label :会員ステータス %>
+    <%= f.radio_button :leave_status, 0 %>
+    <%= f.label :leave_status, "有効", {value: :leave_status, style: "display: inline-block;"} %>
+    <%= f.radio_button :leave_status, 1 %>
+    <%= f.label :leave_status, "退会済み", {value: :leave_status, style: "display: inline-block;"} %>
   </div>
 
   <div class="actions row">
-      <%= f.submit '変更内容を保存する',　class:"data-disable-with" %>
+      <%= f.submit '変更を保存する',　class:"data-disable-with" %>
   </div>
 <% end %>
