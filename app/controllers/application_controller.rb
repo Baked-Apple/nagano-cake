@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
     end
 
     #sign out後トップページへ
+
+    
+
     
 
     protected

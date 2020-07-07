@@ -1,18 +1,47 @@
-<div class="row">
-<div class="col-xs-6">
-<%= form_for(@genre, url: {controller: 'admin/genres', action: 'update' }) do |f| %>
-				
-				<%= f.label "ジャンル名" %>
-				<%= f.text_field :genre %>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1">
 
-				<%= f.label "有効" %>
-    			<%= f.check_box :invalid_status, {} %>
+			<!-- error-message -->
+			<% if @genre.errors.any? %>
+			<div class="error_explanation">
+			  <h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
+			  <ul>
+			  <% @genre.errors.full_messages.each do |message| %>
+			    <li><%= message %></li>
+			  <% end %>
+			  </ul>
+		    </div>
+			<% end %>
 
-    			<%= f.label "無効" %>
-    			<%= f.check_box :invalid_status, {} %>
+			<h2>ジャンル編集画面</h2>
+			<div class="edit-genre-form">
+				<%= form_for [:admin, @genre] do |f| %>
+				<!-- edit form -->
+				<div class="row edit-form form-group form-group-lg">
+					<div class="col-xs-2"><%= f.label :genre, "ジャンル", class:"control-label" %></div>
+					<div class="col-xs-8"><%= f.text_field :genre, class:"form-control" %></div>
+				</div>
 
-    			<%= f.submit '変更を保存する' %>
+				<!-- radio button -->
+				<div class="row edit-radio-button">
+					<div class="col-xs-2">
+						<label>ステータス</label>
+					</div>
+					<div class="col-xs-8">
+						<%= f.label :genre, "有効", for: "genre_active_status_有効" %>
+						<%= f.radio_button :invalid_status, :"有効", :checked => (@genre.invalid_status == "有効") %>
+						<%= f.label :name, "無効", for: "genre_active_status_無効" %>
+						<%= f.radio_button :invalid_status, :"無効", :checked => (@genre.invalid_status == "無効") %>
+					</div>
+				</div>
 
-<% end %>
-</div>
+				<!-- update button -->
+				<div class="row edit-update-button col-xs-8 col-xs-offset-2">
+					<%= f.submit '変更を追加する', class:"btn btn-success" %>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </div>
