@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 
     #sign out後トップページへ
 
+
     protected
 	def configure_permitted_parameters
 		#signup/ユーザー登録情報

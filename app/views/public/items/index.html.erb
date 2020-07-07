@@ -3,19 +3,48 @@
 </header><!-- /header -->
 
 <div class="container">
-	<div class="row">
-		<div class="col-xs-3">
-			<h4>ジャンル検索</h4>
-		</div>
-		<!-- サイドバーでジャンル検索 -->
-		<h2>商品一覧</h2>
+  <div class="row">
+    <div class="col-xs-2">
+      <%= render partial: "search", locals: {genres: @genres} %>
+    </div>
+    <div class="col-xs-9 col-xs-offset-1">
+      <div class="product-card-content">
+        <% if @items %>
+        <%# 商品一覧 %>
+        <% if @items.count > 0 %>
+        <% if @item_genre.present? %>
+        <h2 class="top-genre-name-title"><%= @item_genre.genre %></h2>
+        <% end %>
+        <p><%="全#{@items.total_count}件中" + "(#{@items.count}件表示)" %></p>
+        <%= render 'item_list', items: @items %>
+        <% else %>
+        <h2>商品の取り扱いがありません</h2>
+        <% end %>
+        <% elsif @q_items %>
+        <%# 検索の場合 %>
+        <div class="product-card-content">
+          <% if @q_items.empty? %>
+          <h3 class="top-empty-message">条件に合う商品が見つかりませんでした</h3>
+          <% else %>
+          <p><%="#{@q_items.total_count}件の商品がヒットしました" %></p>
+          <% end %>
 
-			<% @items.each do |item| %>
+          <%= render 'item_list', products: @q_items %>
 
-				<%= item.name %>
-				<%= item.price %>
+          <div class="row text-center">
+            <%= paginate @q_items, class: "paginate" %>
+          </div>
+        </div>
+        <% else %>
 
-			<% end %>
-	</div>
+        <% end %>
+      </div>
+    </div>
+    <div class= "text-center">
+      <% if @items%>
+      <%= paginate @items %>
+      <% end %>
+    </div>
+  </div>
 </div>
 	
