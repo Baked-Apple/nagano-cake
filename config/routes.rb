@@ -22,8 +22,9 @@ Rails.application.routes.draw do
     get 'orders/confirm' => 'orders#confirm'
     get 'orders/thanks' => 'orders#thanks'
   	resources :orders, only: [:new, :index, :show, :create]
-    resources :items, only: [:index, :show, :create]
-    resources :cart_items, only: [:index, :create, :update, :destroy]
+    resources :items, only: [:index, :show, :create] do
+      resources :cart_items, only: [:index, :create, :update, :destroy]
+    end
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
   end
 

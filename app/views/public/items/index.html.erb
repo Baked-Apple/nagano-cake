@@ -1,6 +1,4 @@
-<header>
-	<%= render 'public/header' %>
-</header><!-- /header -->
+
 
 <div class="container">
 	<div class="row">
@@ -12,7 +10,7 @@
 
 			<% @items.each do |item| %>
 
-				<%= item.name %>
+				<%= link_to item.name, public_item_path(item.id) %>
 				<%= item.price %>
 
 			<% end %>
