@@ -8,12 +8,19 @@ class ApplicationController < ActionController::Base
 			admin_top_path
 		# 会員ログイン後　＝＞　トップページ
 		elsif member_signed_in?
-			public_mypage_path
+			public_top_path
 		end
     end
 
-    #sign out後トップページへ
-
+    def after_sign_out_path_for(resource)
+    	# 会員ログアウト後　＝＞　トップ画面
+    	if resource == :member
+    		public_top_path
+    	# 管理者ログアウト後　＝＞　ログイン画面
+    	elsif resource == :admin
+    		admin_session_path
+    	end
+    end
 
     protected
 	def configure_permitted_parameters
