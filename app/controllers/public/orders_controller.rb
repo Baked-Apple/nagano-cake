@@ -6,8 +6,13 @@ class Public::OrdersController < ApplicationController
 
   # 注文履歴詳細画面
   def show
-    @order_items = current_member.orders
     @order = Order.find(params[:id])
+    case @order.pay_type
+    when "credit" then
+      @pay = "クレジットカード"
+    when "bank" then
+      @pay = "銀行振込"
+    end
   end
 
   # 注文入力画面
@@ -57,10 +62,27 @@ class Public::OrdersController < ApplicationController
 
   # 注文確定・保存
   def create
+    @cart_items = current_member.cart_items
     @order = current_member.orders.build(order_params)
-    @order.save
-    current_member.cart_items.destroy_all
-    redirect_to public_orders_thanks_path
+    if current_member.cart_items.empty?
+      redirect_to public_items_path
+    else
+      if @order.save
+        @cart_items.each do |cart_item|
+          @order.order_items.create(
+            order_id: @order.id,
+            item_id: cart_item.item_id,
+            price: cart_item.item.price_with_tax,
+            quantity: cart_item.quantity,
+            product_status: 0
+          )
+        end
+        current_member.cart_items.destroy_all
+        redirect_to public_orders_thanks_path
+      else
+        redirect_to public_orders_new_path
+      end
+    end  
   end
 
   # 注文完了(サンクス)
@@ -69,6 +91,6 @@ class Public::OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:total_fee, :postage, :pay_type, :postal_code, :address, :delivery_name, :order_status) #:nameを消して:postageを追加でもできた。:member_id, :nameはいらなかった説。:delivery_infoはいる？現在ordersテーブルのカラムのみ記述
+      params.require(:order).permit(:total_fee, :postage, :pay_type, :postal_code, :address, :delivery_name, :order_status)
     end
 end
