@@ -13,15 +13,15 @@ class Public::CartItemsController < ApplicationController
 	
 
 	def update
-		@cart_item = CartItem.find(params[:id])
-   		 @cart_item.update!(cart_item_params)
+    	@cart_item = CartItem.find(params[:id])
+    @cart_item.update!(cart_item_params)
 
-    	redirect_to public_cart_items_path
-
+    @member = Member.find(current_member.id)
+    render :index
 	end
 
 	def destroy
-		cart_item = CartItem.find(params[:id])
+		 cart_item = CartItem.find(params[:id])
     if cart_item.destroy
       flash[:notice] = "カート内の商品を削除しました。"
       redirect_to public_cart_items_path
@@ -29,6 +29,16 @@ class Public::CartItemsController < ApplicationController
       render action: :index
     end
 	end
+
+	def destroy_all
+    member = Member.find(current_member.id)
+    if member.cart_items.destroy_all
+      flash[:notice] = "カート内の商品を全て削除しました。"
+      redirect_to public_cart_items_path
+    else
+      render action: :index
+    end
+  end
 
 	
 
