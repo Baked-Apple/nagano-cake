@@ -16,36 +16,38 @@ class Public::OrdersController < ApplicationController
     @deliveries = current_member.deliveries
   end
 
-  # 注文確認画面
+  #　注文確認画面
   def confirm
     @cart_items = current_member.cart_items
-    @order = Order.new
+    @order = current_member.orders.new(order_params)
     # session[:order] = Order.new()
-    # session[:order][:pay_type] = params[:pay_type]
-    # @pay_type = session[:order]["pay_type"]
-    # session[:order] = params[:delivery]
-    @pay_type = params[:order][:pay_type]
-    case @pay_type
-    when 1 then
-      @pay = 1
-    when 2 then
-      @pay = 2
+    # session[:order] = order_params
+    # session[:order][:delivery_info] = params[:delivery_info]
+    # session[:order][:registered_address] = params[:registered_address]
+    # @order[:order][:delivery_info] = session[:order]["delivery_info"]
+    pay_type = params[:order][:pay_type]
+    case @order.pay_type
+    when "credit" then
+      @pay = "クレジットカード"
+    when "bank" then
+      @pay = "銀行振込"
     end
-    @derivery = params[:delivery]
-    case @derivery
-    when 1 then
-      @postal_code = current_member.postal_code
-      @address = current_member.address
-      @name = current_member.last_name + " " + current_member.first_name 
-    when 2 then
-      delivery = Delivery.find(params[:registered_address])
-      @postal_code = delivery.postal_code
-      @address = delivery.address
-      @name = delivery.name
-    when 3 then
-      @postal_code = params[:postal_code]
-      @address = params[:address]
-      @name = params[:delivery_name]
+
+    @order.delivery_info = params[:order][:delivery_info]
+    case @order.delivery_info 
+    when "self_addr" then
+      @order.postal_code = current_member.postal_code
+      @order.address = current_member.address
+      @order.delivery_name = current_member.last_name + " " + current_member.first_name 
+    when "registered_addr" then
+      delivery = Delivery.find(params[:order][:registered_address])
+      @order.postal_code = delivery.postal_code
+      @order.address = delivery.address
+      @order.delivery_name = delivery.name
+    when "new_addr" then
+      @order.postal_code = params[:order][:postal_code]
+      @order.address = params[:order][:address]
+      @order.delivery_name = params[:order][:delivery_name]
     end
   end
 
@@ -62,6 +64,6 @@ class Public::OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:pay_type, :delivery_name, :postal_code, :address)
+      params.require(:order).permit(:member_id, :total_fee, :postage, :pay_type, :delivery_name, :postal_code, :address, :order_status) #:nameを消して:postageを追加でもできた。:nameはいらなかった説。現在ordersテーブルのカラムのみ記述
     end
 end
