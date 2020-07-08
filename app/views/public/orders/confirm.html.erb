@@ -14,9 +14,9 @@
       <% @cart_items.each do |cart_item| %>
         <tr>
           <td><%= attachment_image_tag cart_item.item, :image, size: "50x50" %><%= cart_item.item.name %></td>
-          <td><%= cart_item.item.price * 1.1 %></td>
+          <td><%= cart_item.item.price * 1.08 %></td>
           <td><%= cart_item.quantity %></td>
-          <td><%=  %></td> 
+          <td><%= cart_item.quantity * cart_item.item.price * 1.08 %></td> 
         </tr>
       <% end %>
     </tbody>
@@ -28,42 +28,45 @@
     <tbody>
       <tr>
         <td>送料</td>
-        <td>¥ <%= 800 %></td>
+        <td>¥ <%= @order.postage %></td>
       </tr>
       <tr>
         <td>商品合計</td>
-        <td>¥ <%= 4200 %></td>
+        <td>¥ <%= current_member.cart_item_sum %></td>
       </tr>
       <tr>
         <td>請求金額</td>
-        <td>¥ <%= 5000 %></td>
+        <td>¥ <%= @order.total_fee %></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<div class="payment">
-  <h4>支払方法</h4>
-  <%= @pay %>
-</div>
-
-<div class="delivery">
-  <h4>お届け先</h4>
-  <%= @order.postal_code %>
-  <%= @order.address %>
-  <%= @order.delivery_name %>
-</div>
-
-<%= form_with model: @order, url: public_orders_path do |f| %>
-  <%= hidden_field_tag :delivery_info, @order.delivery_info %>
-  <%= f.hidden_field :total_fee %>
-  <%= f.hidden_field :postage %>
-  <%= f.hidden_field :pay_type %>
-  <%= f.hidden_field :delivery_name %>
-	<%= f.hidden_field :postal_code %>
-	<%= f.hidden_field :address %>
-  <%= f.hidden_field :order_status %>
-  <div class="action">
-    <%= f.submit "購入を確定する", class: "btn btn-success" %>
+<div class="col-xs-12">
+  <div class="payment">
+    <h4>支払方法</h4>
+    <%= @pay %>
   </div>
-<% end %>
+
+  <div class="delivery">
+    <h4>お届け先</h4>
+    <%= @order.postal_code %>
+    <%= @order.address %>
+    <%= @order.delivery_name %>
+  </div>
+
+
+  <%= form_with model: @order, url: public_orders_path do |f| %>
+    <%= text_field_tag :delivery_info, @order.delivery_info %>
+    <%= f.text_field :total_fee, value: @order.total_fee %>
+    <%= f.text_field :postage, value: @order.postage %>
+    <%= f.text_field :pay_type, value: @order.pay_type %>
+    <%= f.text_field :postal_code, value: @order.postal_code %>
+    <%= f.text_field :address, value: @order.address %>
+    <%= f.text_field :delivery_name, value: @order.delivery_name %>
+    <%= f.text_field :order_status, value: :pending %>
+    <div class="action">
+      <%= f.submit "購入を確定する", class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>
