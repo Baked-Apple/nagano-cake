@@ -1,12 +1,12 @@
 class Public::OrdersController < ApplicationController
   # 注文履歴一覧画面
   def index
-    @orders = Order.all
+    @orders = current_member.orders
   end
 
   # 注文履歴詳細画面
   def show
-    @orders = Order.all
+    @order_items = current_member.orders
     @order = Order.find(params[:id])
   end
 
@@ -18,13 +18,16 @@ class Public::OrdersController < ApplicationController
 
   #　注文確認画面
   def confirm
-    @cart_items = current_member.cart_items
-    @order = current_member.orders.new(order_params)
     # session[:order] = Order.new()
     # session[:order] = order_params
     # session[:order][:delivery_info] = params[:delivery_info]
     # session[:order][:registered_address] = params[:registered_address]
     # @order[:order][:delivery_info] = session[:order]["delivery_info"]
+    @cart_items = current_member.cart_items
+    @order = current_member.orders.build(order_params)
+    @order.postage = 800
+    @order.total_fee = current_member.cart_item_sum + @order.postage
+
     pay_type = params[:order][:pay_type]
     case @order.pay_type
     when "credit" then
@@ -49,12 +52,14 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:address]
       @order.delivery_name = params[:order][:delivery_name]
     end
+    
   end
 
   # 注文確定・保存
   def create
-    @order = Order.new(order_params)
+    @order = current_member.orders.build(order_params)
     @order.save
+    current_member.cart_items.destroy_all
     redirect_to public_orders_thanks_path
   end
 
@@ -64,6 +69,6 @@ class Public::OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:member_id, :total_fee, :postage, :pay_type, :delivery_name, :postal_code, :address, :order_status) #:nameを消して:postageを追加でもできた。:nameはいらなかった説。現在ordersテーブルのカラムのみ記述
+      params.require(:order).permit(:total_fee, :postage, :pay_type, :postal_code, :address, :delivery_name, :order_status) #:nameを消して:postageを追加でもできた。:member_id, :nameはいらなかった説。:delivery_infoはいる？現在ordersテーブルのカラムのみ記述
     end
 end

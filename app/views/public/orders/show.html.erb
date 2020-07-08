@@ -55,12 +55,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @cart_items.each do |cart_item| %>
+    <% @order_items.each do |order_item| %>
       <tr>
-        <td><%= attachment_image_tag order.member.cart_item, :image, size: "50x50" %><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.price %></td> # これだと税抜価格の表示になる
-        <td><%= cart_item.quantity %></td>
-        <td>カート内商品小計</td> # itemsのprice * cart_itemsのquantity
+        <%# <td><%= attachment_image_tag order.member.cart_item, :image, size: "50x50" %>
+        <td><%= order_item.item.name %></td>
+        <td><%= order_item.item.price %></td> # これだと税抜価格の表示になる
+        <td><%= order_item.quantity %></td>
+        <td>カート内商品小計</td> # itemsのprice * order_itemsのquantity
       </tr>
     <% end %>
   </tbody>
