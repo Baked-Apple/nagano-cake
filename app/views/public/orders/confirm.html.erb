@@ -1,51 +1,69 @@
 <h3>注文情報確認</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価(税込み)</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
+<div class="col-xs-8">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= attachment_image_tag cart_item, :image, size: "50x50" %><%= cart_item.item.name %></td>
-        <td><%= cart_item.item.price %></td> # これだと税抜価格の表示になる
-        <td><%= cart_item.quantity %></td>
-        <td>カート内商品小計</td> # itemsのprice * cart_itemsのquantity
+        <th>商品名</th>
+        <th>単価(税込み)</th>
+        <th>数量</th>
+        <th>小計</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= attachment_image_tag cart_item.item, :image, size: "50x50" %><%= cart_item.item.name %></td>
+          <td><%= cart_item.item.price * 1.1 %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%=  %></td> 
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<br>
+<div class="col-xs-4">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>送料</td>
+        <td>¥ <%= 800 %></td>
+      </tr>
+      <tr>
+        <td>商品合計</td>
+        <td>¥ <%= 4200 %></td>
+      </tr>
+      <tr>
+        <td>請求金額</td>
+        <td>¥ <%= 5000 %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>送料</td>
-      <td><%= 800 %></td>
-    </tr>
-    <tr>
-      <td>商品合計</td>
-      <td></td> # カート内商品小計の合計
-    </tr>
-    <tr>
-      <td>請求金額</td>
-      <td><%=  %></td>　# 商品合計 + 800
-    </tr>
-  </tbody>
-</table>
+<div class="payment">
+  <h4>支払方法</h4>
+  <%= @pay %>
+</div>
 
-<%= form_with model: [@cart_items, @order], url: public_cart_item_order_path do |f| %>
-  <%= f.label :支払方法 %>
-  <%= f.hidden_field :pay_type %><br>
-  <%= f.label :お届け先 %>
-	<%= f.hidden_field :postal_code %><br>
-	<%= f.hidden_field :address %><br>
-	<%= f.hidden_field :delivery_name %><br>
-  <%= f.submit "購入を確定する" %>
+<div class="delivery">
+  <h4>お届け先</h4>
+  <%= @order.postal_code %>
+  <%= @order.address %>
+  <%= @order.delivery_name %>
+</div>
+
+<%= form_with model: @order, url: public_orders_path do |f| %>
+  <%= hidden_field_tag :delivery_info, @order.delivery_info %>
+  <%= f.hidden_field :total_fee %>
+  <%= f.hidden_field :postage %>
+  <%= f.hidden_field :pay_type %>
+  <%= f.hidden_field :delivery_name %>
+	<%= f.hidden_field :postal_code %>
+	<%= f.hidden_field :address %>
+  <%= f.hidden_field :order_status %>
+  <div class="action">
+    <%= f.submit "購入を確定する", class: "btn btn-success" %>
+  </div>
 <% end %>
