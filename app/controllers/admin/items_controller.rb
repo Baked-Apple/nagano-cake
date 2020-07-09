@@ -30,7 +30,7 @@ class Admin::ItemsController < ApplicationController
 	def update
 		@item = Item.find(params[:id])
     if @item.update(item_params)
-      	redirect_to admin_item_path(@product.id), notice:'商品情報を更新しました'
+      	redirect_to admin_item_path(@item.id), notice:'商品情報を更新しました'
     else
       render 'edit'
     end

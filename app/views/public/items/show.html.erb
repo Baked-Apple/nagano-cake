@@ -14,7 +14,7 @@
     <div class="col-xs-5 product-item-content">
       <h2><%= @item.name %></h2>
       <p><%= @item.introduction %></p>
-      <p><%= @item.price * 1.08 %>(税込)</p>
+      <p><%= (@item.price * 1.1).floor %>(税込)</p>
       <%= form_for(@cart_item, url: public_cart_items_path) do |f|  %>
       <%= f.select :quantity,(1..10).to_a, {}, class: "form-control product-show-form-control" %>
       <%= f.hidden_field :item_id, :value => @item.id %>
