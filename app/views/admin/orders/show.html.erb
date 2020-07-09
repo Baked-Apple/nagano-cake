@@ -2,9 +2,9 @@
 
 <p>購入者  <%= @order.member.last_name %><%= @order.member.first_name %></p>
 <p>配送先　<%= @order.address %><br>
-	      <%= @order.address_name %></p>
+	      <%= @order.delivery_name %></p>
 <p>支払方法 <%= @order.pay_type %></p>
-<p>注文ステータス</p>
+<p>注文ステータス<%= @order.order_status %></p>
 
 <table class='table'>
   <thead>
@@ -19,12 +19,12 @@
   </thead>
 
   <tbody>
-    <% @orders.each do |order| %>
+    <% @order.order_items.each do |order_item| %>
     <tr>
-        <td><%= order.order_item.name %></td>
-        <td><%= order.order_item.price %></td>
-        <td><%= order.order_item.quantity %></td>
-        <td><%= order.order_item.product_status %></td>
+        <td><%= order_item.name %></td>
+        <td><%= order_item.price %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= order_item.product_status %></td>
         <td><%= f.submit "更新" %></td>
     </tr>
     <% end %>

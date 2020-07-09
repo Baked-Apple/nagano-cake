@@ -6,7 +6,7 @@ class Admin::OrdersController < ApplicationController
 		# 本日の注文一覧（admin/topから）
 		when 'today'
 			@orders = Order.all.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-		#会員の注文履歴一覧
+		#会員の注文履歴一覧（会員のマイページから)
 		when 'member'
 			member_id = Rails.application.routes.recognize_path(request.referer)[:id]
 			@member = Member.find(member_id)
