@@ -3,8 +3,12 @@
 <p>購入者  <%= @order.member.last_name %><%= @order.member.first_name %></p>
 <p>配送先　<%= @order.address %><br>
 	      <%= @order.delivery_name %></p>
-<p>支払方法 <%= @order.pay_type %></p>
-<p>注文ステータス<%= @order.order_status %></p>
+<p>支払方法　<%= @pay %></p>
+<p>注文ステータス<%= form_for [:admin, @order] do |f| %>
+  <%= f.select :order_status, Order.order_statuses.keys %>
+  <%= f.submit '更新', class: "btn btn-success " %>
+  <% end %>
+</p>
 
 <table class='table'>
   <thead>
@@ -21,11 +25,16 @@
   <tbody>
     <% @order.order_items.each do |order_item| %>
     <tr>
-        <td><%= order_item.name %></td>
-        <td><%= order_item.price %></td>
+        <td><%= order_item.item.name %></td>
+        <td>¥ <%= (order_item.item.price * 1.08).to_i %></td>
         <td><%= order_item.quantity %></td>
-        <td><%= order_item.product_status %></td>
-        <td><%= f.submit "更新" %></td>
+        <td>¥ <%= (order_item.quantity * order_item.item.price * 1.08).to_i %></td>
+        <td>
+             <%= form_for [:admin, @order_item] do |f| %>
+             <%= f.select :product_status, OrderItem.product_statuses.keys %>
+             <%= f.submit '更新', class: "btn btn-success " %>
+             <% end %>
+        </td>
     </tr>
     <% end %>
 

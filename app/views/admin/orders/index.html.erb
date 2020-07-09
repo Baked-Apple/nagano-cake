@@ -17,10 +17,16 @@
         <td><%= order.member.last_name%><%= order.member.first_name%></td>
         <td><% order.order_items.each do |order_item| %>
             <% order_item.quantity %>
-            <% end %></td>
-            </td>
-        <td><%= order.order_status %></td>
-        <td></td>
+            <% end %>
+        </td>
+        <td>
+          <% if order.order_status == "pending" %>入金待ち
+          <% elsif order.order_status == "confirmed" %>入金確認
+          <% elsif order.order_status == "making" %>製作中
+          <% elsif order.order_status == "preparing" %>発送準備中
+          <% else order.order_status == "delivered" %>発送済み
+          <% end %>
+        </td>
     </tr>
     <% end %>
 

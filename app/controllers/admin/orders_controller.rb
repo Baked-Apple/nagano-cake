@@ -17,17 +17,41 @@ class Admin::OrdersController < ApplicationController
 		end
 	end
 
+
 	def show
 		@order = Order.find(params[:id])
-	end
+		case @order.pay_type
+	    when "credit" then
+	      @pay = "クレジットカード"
+	    when "bank" then
+	      @pay = "銀行振込"
+	    end
+    end
 
 	def update
 		@order = Order.find(params[:id])
 		if @order.update(order_params)
-			redirect_to public_orders_path
-		else
-			render :edit
+			# 注文状況が１＝入金確認になったら、製作待ち１に
+		 	if @order_status == 1
+		 		@order_item.update(product_status: 1)
+		 	end
+		 	redirect_to admin_order_path(@order.id)
 		end
-	end
+    end
+
+
+	 	# # 製作状況が２＝製作中になったら、注文ステータスを製作中２に
+	 	# elsif @product_status == 2
+	 	# 	@order.update(order_status: 2)
+	 	# # 製作状況が３＝製作完了になったら、注文ステータスを発送準備中３に
+	 	# elsif @product_status == 3
+	 	# 	@order_item.update(product_status: 3)
+
+
+	private
+    def order_params
+      params.require(:order).permit(:total_fee, :postage, :pay_type, :postal_code, :address, :delivery_name, :order_status, :product_status)
+    end
+
 
 end
