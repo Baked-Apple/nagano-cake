@@ -32,7 +32,7 @@ class Admin::OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 		if @order.update(order_params)
 			# 注文状況が１＝入金確認になったら、製作待ち１に
-		 	if @order_status == 1
+		 	if @order_status == "confirmed"
 		 		@order_item.update(product_status: 1)
 		 	end
 		 	redirect_to admin_order_path(@order.id)

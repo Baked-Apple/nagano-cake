@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'top' => 'home#top'
     resources :orders, only: [:index, :show, :update]
-    patch 'order_items/:id' => 'order_items#update'
+    resources :order_items, only: [:update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :members, only: [:index, :show, :edit, :update]

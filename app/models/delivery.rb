@@ -3,4 +3,8 @@ class Delivery < ApplicationRecord
 	validates :postal_code, presence: true, length: { minimum: 7,maximum: 7 }
 	validates :address, presence: true
 	validates :name, presence: true
+
+	def collect_delivery
+		self.postal_code + self.address + self.name	
+	end
 end

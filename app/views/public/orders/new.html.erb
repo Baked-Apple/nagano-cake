@@ -20,7 +20,7 @@
 
 	<div class="field">
 		<%= f.radio_button :delivery_info, "registered_addr" %>登録済住所から選択
-		<%= f.collection_select(:registered_address, @deliveries, :id, :address, {prompt: "選択してください"}, class: "form-control") %>
+		<%= f.collection_select(:registered_address, @deliveries, :id, :collect_delivery, {prompt: "選択してください"}, class: "form-control") %>
 	</div>
 
 	<div class="field">
