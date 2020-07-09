@@ -72,7 +72,7 @@
       </tr>
       <tr>
         <td>商品合計</td>
-        <td>¥ <%=  %></td>
+        <td>¥ <%= @order.total_fee.to_i - @order.postage.to_i %></td>
       </tr>
       <tr>
         <td>請求金額</td>

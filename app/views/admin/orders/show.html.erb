@@ -30,10 +30,10 @@
         <td><%= order_item.quantity %></td>
         <td>¥ <%= (order_item.quantity * order_item.item.price * 1.08).to_i %></td>
         <td>
-             <%= form_for [:admin, @order_item] do |f| %>
-             <%= f.select :product_status, OrderItem.product_statuses.keys %>
-             <%= f.submit '更新', class: "btn btn-success " %>
-             <% end %>
+            <%= form_with model: order_item, url: admin_order_item_path(order_item.id), local: true do |f| %>
+            <%= f.select :product_status, OrderItem.product_statuses.keys %>
+            <%= f.submit '更新', class: "btn btn-success " %>
+            <% end %>
         </td>
     </tr>
     <% end %>
