@@ -10,3 +10,5 @@ Admin.create(
 	email: "admin@mail",
 	password: "adminadmin"
 	)
+
+Genre.create([{genre: "ケーキ",invalid_status: 0,}, {genre: "プリン",invalid_status: 0,}, {genre: "焼き菓子",invalid_status: 0,}, {genre: "キャンディ",invalid_status: 0,}])
