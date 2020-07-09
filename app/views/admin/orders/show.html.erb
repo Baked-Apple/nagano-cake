@@ -1,0 +1,33 @@
+<h3>注文履歴詳細</h3>
+
+<p>購入者  <%= @order.member.last_name %><%= @order.member.first_name %></p>
+<p>配送先　<%= @order.address %><br>
+	      <%= @order.delivery_name %></p>
+<p>支払方法 <%= @order.pay_type %></p>
+<p>注文ステータス<%= @order.order_status %></p>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>製作ステータス</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.order_items.each do |order_item| %>
+    <tr>
+        <td><%= order_item.name %></td>
+        <td><%= order_item.price %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= order_item.product_status %></td>
+        <td><%= f.submit "更新" %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
