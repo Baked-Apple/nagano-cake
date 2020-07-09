@@ -14,15 +14,30 @@
 	<tbody>
 		<% @orders.each do |order| %>
 			<tr>
-				<td><%= order.created_at %></td>
+				<td><%= order.created_at.strftime("%Y/%m/%d") %></td>
 				<td>
 					<%= order.postal_code %><br>
 					<%= order.address %><br>
 					<%= order.delivery_name %><br>
 				</td>
-				<td><%= order.current_member.cart_items %></td> #current_cartを定義すれば持ってこれる？
-				<td>入金済み</td>
-				<td><%= link_to "表示する", public_order_path(order.id) %></td>
+				<td>
+					<% order.order_items.each do |order_item| %>
+						<%= "・#{order_item.item.name}" %>
+					<% end %>
+				</td>
+				<td>¥ <%= order.total_fee %></td>
+				<% if order.order_status == "pending" %>
+					<td>入金待ち</td>
+				<% elsif order.order_status == "confirmed" %>
+					<td>入金確認</td>
+				<% elsif order.order_status == "making" %>
+					<td>製作中</td>
+				<% elsif order.order_status == "preparing" %>
+					<td>発送準備中</td>
+				<% else order.order_status == "delivered" %>
+					<td>発送済み</td>
+				<% end %>
+				<td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
 			</tr>
 		<% end %>
 	</tbody>
