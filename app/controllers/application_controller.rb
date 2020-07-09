@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
     end
 
     #sign out後トップページへ
-
+    private
+    def set_search_item
+      # 検索バー表示の @q
+      @q = Item.ransack(params[:q])
+    end
 
     protected
 	def configure_permitted_parameters

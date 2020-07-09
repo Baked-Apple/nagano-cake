@@ -29,7 +29,7 @@
           <p><%="#{@q_items.total_count}件の商品がヒットしました" %></p>
           <% end %>
 
-          <%= render 'item_list', products: @q_items %>
+          <%= render 'item_list', items: @q_items %>
 
           <div class="row text-center">
             <%= paginate @q_items, class: "paginate" %>
