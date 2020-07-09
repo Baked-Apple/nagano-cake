@@ -1,7 +1,7 @@
 class Public::ItemsController < ApplicationController
 	def index
     if params[:genre_id].present?
-      @item = Item.where(genre_id: params[:genre_id])
+      @items = Item.where(genre_id: params[:genre_id])
       .page(params[:page]).per(16).reverse_order
 
       @item_genre = @items.first.genre if @items.count > 0
