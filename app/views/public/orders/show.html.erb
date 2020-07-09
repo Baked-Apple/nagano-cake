@@ -53,9 +53,9 @@
       <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= attachment_image_tag order_item.item, :image, size: "50x50" %> <%= order_item.item.name %></td>
-          <td>¥ <%= (order_item.item.price * 1.08).to_i %></td>
+          <td>¥ <%= (order_item.item.price * 1.1).floor %></td>
           <td><%= order_item.quantity %></td>
-          <td>¥ <%= (order_item.quantity * order_item.item.price * 1.08).to_i %></td>
+          <td>¥ <%= (order_item.quantity * order_item.item.price * 1.1).floor %></td>
         </tr>
       <% end %>
     </tbody>
