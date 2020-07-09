@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
 	def update
     	@cart_item = CartItem.find(params[:id])
     @cart_item.update!(cart_item_params)
-
+    flash[:notice] = "カート内の商品情報を更新しました。"
     @member = Member.find(current_member.id)
     render :index
 	end
