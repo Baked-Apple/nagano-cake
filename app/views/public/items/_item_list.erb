@@ -4,7 +4,7 @@
       <%= attachment_image_tag item, :image, :size => '280x280' %>
       <div class="caption">
         <p><%= item.name %></p>
-        <p><%= "¥#{item.price}" %></p>
+        <p>¥ <%= (item.price * 1.1).floor %></p>
         <% if item.sale_status == 1 %>
         <p class="item-sale-status">販売中</p>
         <% end %>

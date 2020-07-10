@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_member!
+  
   # 注文履歴一覧画面
   def index
     @orders = current_member.orders
@@ -65,6 +67,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_member.cart_items
     @order = current_member.orders.build(order_params)
     if current_member.cart_items.empty?
+      flash[:notice] = "購入する商品がありません"
       redirect_to public_items_path
     else
       if @order.save
@@ -80,6 +83,7 @@ class Public::OrdersController < ApplicationController
         current_member.cart_items.destroy_all
         redirect_to public_orders_thanks_path
       else
+        flash[:notice] = "登録に失敗しました"
         redirect_to public_orders_new_path
       end
     end  

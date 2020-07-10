@@ -28,7 +28,7 @@
 						<% @member.cart_items.each do |cart_item| %>
 						<tr>
 							<td><%= cart_item.item.name %></td>
-							<td class="text-right"><%= cart_item.item.price_with_tax %>円</td>
+							<td class="text-right">¥ <%= cart_item.item.price_with_tax %></td>
 							<td class="text-right">
 
 								<%= form_for(cart_item, url: public_cart_item_path(cart_item.id),method: :patch) do |f| %>
@@ -42,7 +42,7 @@
 
 
 							</td>
-							<td class="text-right"><%= cart_item.quantity * (cart_item.item.price * 1.1).floor %></td>
+							<td class="text-right">¥ <%= cart_item.quantity * (cart_item.item.price * 1.1).floor %></td>
 							<td class="text-right"><%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger" %></td>
 						</tr>
 						<% end %>
@@ -56,7 +56,7 @@
 					<table class="table">
 						<tbody>
 							<th class="active">合計金額</th>
-							<td class="text-right"><%= @member.cart_item_sum %>円</td>
+							<td class="text-right">¥ <%= @member.cart_item_sum %></td>
 						</tbody>
 					</table>
 				</div>

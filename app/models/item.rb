@@ -4,8 +4,13 @@ class Item < ApplicationRecord
 	has_many :cart_items, dependent: :destroy
 	attachment :image
 
+	validates :name, presence: true
+	validates :introduction, presence: true
+	validates :price, presence: true
+	validates :sale_status, presence: true
+
 	def price_with_tax
-    (price * 1.08).round
-  end
+		(price * 1.1).floor
+	end
 
 end
