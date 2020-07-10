@@ -30,23 +30,17 @@ class Admin::OrdersController < ApplicationController
 
 	def update
 		@order = Order.find(params[:id])
+		order_items = @order.order_items.all
 		if @order.update(order_params)
 			# 注文状況が１＝入金確認になったら、製作待ち１に
-		 	if @order_status == "confirmed"
-		 		@order_item.update(product_status: 1)
+		 	if @order.order_status == "confirmed"
+		 		order_items.each do |order_item|
+		 		order_item.update(product_status: 1)
+		 	end
 		 	end
 		 	redirect_to admin_order_path(@order.id)
 		end
     end
-
-
-	 	# # 製作状況が２＝製作中になったら、注文ステータスを製作中２に
-	 	# elsif @product_status == 2
-	 	# 	@order.update(order_status: 2)
-	 	# # 製作状況が３＝製作完了になったら、注文ステータスを発送準備中３に
-	 	# elsif @product_status == 3
-	 	# 	@order_item.update(product_status: 3)
-
 
 	private
     def order_params
