@@ -1,2 +1,93 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+<div class="row">
+
+  <h3>注文履歴詳細</h3>
+
+  <div class="col-xs-12">
+    <h4>注文情報</h4>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>注文日</td>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <td>配送先</td>
+          <td>
+            <%= @order.postal_code %><br>
+            <%= @order.address %><br>
+            <%= @order.delivery_name %><br>
+          </td>
+        </tr>
+        <tr>
+          <td>支払方法</td>
+          <td><%= @pay %></td>
+        </tr>
+        <tr>
+          <td>ステータス</td>
+          <% if @order.order_status == "pending" %>
+            <td>入金待ち</td>
+          <% elsif @order.order_status == "confirmed" %>
+            <td>入金確認</td>
+          <% elsif @order.order_status == "making" %>
+            <td>製作中</td>
+          <% elsif @order.order_status == "preparing" %>
+            <td>発送準備中</td>
+          <% else @order.order_status == "delivered" %>
+            <td>発送済み</td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-xs-8">
+    <h4>注文内容</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込み)</th>
+          <th>数量</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |order_item| %>
+          <tr>
+            <td><%= attachment_image_tag order_item.item, :image, size: "50x50" %> <%= order_item.item.name %></td>
+            <td>¥ <%= (order_item.item.price * 1.1).floor %></td>
+            <td><%= order_item.quantity %></td>
+            <td>¥ <%= (order_item.quantity * order_item.item.price * 1.1).floor %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-xs-4">
+    <h4>請求情報</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>送料</td>
+          <td>¥ <%= @order.postage.to_i %></td>
+        </tr>
+        <tr>
+          <td>商品合計</td>
+          <td>¥ <%= @order.total_fee.to_i - @order.postage.to_i %></td>
+        </tr>
+        <tr>
+          <td>請求金額</td>
+          <td>¥ <%= @order.total_fee.to_i %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

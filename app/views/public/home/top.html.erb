@@ -1,5 +1,42 @@
 <header>
 	<%= render 'public/header' %>
 </header><!-- /header -->
-<h1>Public::Home#top</h1>
-<p>Find me in app/views/public/home/top.html.erb</p>
+
+
+<div class="row">
+
+	<div class="col-xs-2">
+		<%= render partial: "public/items/search", locals: {genres: @genres} %>
+	</div>
+
+	<div class="col-xs-9 col-xs-offset-1 top-main">
+
+		<div class= "welcome-message">
+			<h4>ようこそ、NaganoCakeへ！<br>
+				このサイトは、ケーキ販売のECサイトになります。<br>
+				会員でない方も商品の閲覧はできますが、<br>
+				購入には会員登録が必要になります。<br>
+			</h4>
+		</div>
+
+		<div class="row product-card-content">
+			<h4>おすすめ商品</h4>
+			<% @all_ranks.each do |item| %>
+				<%= link_to public_item_path(item.id) do %>
+					<div class="thumbnail product-thumbnail col-xs-2">
+						<%= attachment_image_tag item, :image, :size => '300x300' %>
+						<div class="caption">
+							<p><%= item.name %></p>
+							<p>¥ <%= (item.price * 1.1).floor %></p>
+							<% if item.sale_status == 0 %>
+								<p class="product-sales-status">売り切れ</p>
+							<% end %>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+		
+	</div>
+
+</div>

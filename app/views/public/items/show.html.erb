@@ -1,0 +1,29 @@
+<header>
+	<%= render 'public/header' %>
+</header><!-- /header -->
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2">
+      <%= render partial: "search", locals: {genres: @genres} %>
+    </div>
+    <div class="col-xs-5 product-item-content">
+      <%= attachment_image_tag @item, :image, :size => '350x300' %>
+    </div>
+    <div class="col-xs-5 product-item-content">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <p>¥ <%= (@item.price * 1.1).floor %>(税込)</p>
+      <%= form_for(@cart_item, url: public_cart_items_path) do |f|  %>
+      <%= f.select :quantity,(1..10).to_a, {}, class: "form-control product-show-form-control" %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+      <% if @item.sale_status == 0 %>
+      <%= f.submit '売り切れ', class: "btn btn-new-register btn-lg", disabled: true %>
+      <% else %>
+      <%= f.submit 'カートに入れる', class: "btn btn-success btn-new-register btn-lg"%>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

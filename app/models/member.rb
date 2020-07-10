@@ -7,17 +7,27 @@ class Member < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
-  #退会ステータス active(会員)　resign(退会)
-  enum leave_status: {有効: false, 退会済み: true}
-
-  #ユーザーが有効であることを確認
-  def active_for_authentication?
-  	super && (self.leave_status == false)
+# カートアイテム合計
+  def cart_item_sum
+    total = 0
+    cart_items.each do |cart_item|
+      total += cart_item.subtotal_price
+    end
+    total
   end
 
-  #退会したユーザーにカスタムメッセージを追加
-  def inactive_message
-  	(self.leave_status == false) ? super : :deleted_account
+   # カート商品合計個数
+  def cart_total_count
+    quantity = 0
+    cart_items.each do |cart_item|
+      quantity += cart_item.quantity
+    end
+    quantity
+  end
+
+  #退会ステータス０＝有効のみログイン可
+  def active_for_authentication?
+    super && (self.leave_status == 0)
   end
 
 end

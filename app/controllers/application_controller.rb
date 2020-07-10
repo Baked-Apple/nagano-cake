@@ -1,14 +1,31 @@
 class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
-	private
-	#sign in後トップページへ
 	def after_sign_in_path_for(resource)
-      public_mypage_path
+		# 管理者ログイン後　＝＞　トップページ
+		if admin_signed_in?
+			admin_top_path
+		# 会員ログイン後　＝＞　トップページ
+		elsif member_signed_in?
+			public_top_path
+		end
     end
-
-    #sign out後トップページへ
-    
+  
+  #sign out後トップページへ
+  def after_sign_out_path_for(resource)
+    	# 会員ログアウト後　＝＞　トップ画面
+    	if resource == :member
+    		public_top_path
+    	# 管理者ログアウト後　＝＞　ログイン画面
+    	elsif resource == :admin
+    		admin_session_path
+    	end
+  end
+ 
+    def set_search_item
+      # 検索バー表示の @q
+      @q = Item.ransack(params[:q])
+    end
 
     protected
 	def configure_permitted_parameters
