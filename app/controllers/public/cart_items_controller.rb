@@ -1,19 +1,21 @@
 class Public::CartItemsController < ApplicationController
-	def index
+  before_action :authenticate_member!
+  
+  def index
 		@member = Member.find(current_member.id)
 
 	end
 
 	def create
 		@cart_item = current_member.cart_items.new(cart_item_params)
-     	@cart_item.save
-      	redirect_to public_cart_items_path
-    end
+    @cart_item.save
+    redirect_to public_cart_items_path
+  end
 
 	
 
 	def update
-    	@cart_item = CartItem.find(params[:id])
+    @cart_item = CartItem.find(params[:id])
     @cart_item.update!(cart_item_params)
     flash[:notice] = "カート内の商品情報を更新しました。"
     @member = Member.find(current_member.id)
@@ -21,7 +23,7 @@ class Public::CartItemsController < ApplicationController
 	end
 
 	def destroy
-		 cart_item = CartItem.find(params[:id])
+		cart_item = CartItem.find(params[:id])
     if cart_item.destroy
       flash[:notice] = "カート内の商品を削除しました。"
       redirect_to public_cart_items_path

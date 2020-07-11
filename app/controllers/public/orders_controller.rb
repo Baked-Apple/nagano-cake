@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_member!
+  before_action :set_cart_items, only: [:confirm, :create]
+  before_action :set_order, only: [:confirm, :create]
   
   # 注文履歴一覧画面
   def index
@@ -25,15 +27,8 @@ class Public::OrdersController < ApplicationController
 
   #　注文確認画面
   def confirm
-    # session[:order] = Order.new()
-    # session[:order] = order_params
-    # session[:order][:delivery_info] = params[:delivery_info]
-    # session[:order][:registered_address] = params[:registered_address]
-    # @order[:order][:delivery_info] = session[:order]["delivery_info"]
-    @cart_items = current_member.cart_items
-    @order = current_member.orders.build(order_params)
     @order.postage = 800
-    @order.total_fee = current_member.cart_item_sum + @order.postage
+    @order.total_fee = current_member.cart_item_sum + @order.postage #請求金額 = カート内商品合計金額 + 送料
 
     pay_type = params[:order][:pay_type]
     case @order.pay_type
@@ -64,15 +59,13 @@ class Public::OrdersController < ApplicationController
 
   # 注文確定・保存
   def create
-    @cart_items = current_member.cart_items
-    @order = current_member.orders.build(order_params)
-    if current_member.cart_items.empty?
+    if @cart_items.empty?
       flash[:notice] = "購入する商品がありません"
       redirect_to public_items_path
     else
-      if @order.save
+      if @order.save #@order.saveがtrueの時、以下実行
         @cart_items.each do |cart_item|
-          @order.order_items.create(
+          @order.order_items.create( #@orderに紐づくorder_itemsテーブルのデータを作成
             order_id: @order.id,
             item_id: cart_item.item_id,
             price: cart_item.item.price_with_tax,
@@ -80,7 +73,14 @@ class Public::OrdersController < ApplicationController
             product_status: 0
           )
         end
-        current_member.cart_items.destroy_all
+        if params[:delivery_info] == "new_addr" #params[:delivery_info] = "new_addr"がtrueの時、以下実行
+          current_member.deliveries.create( #current_memberに紐づくdeliveriesテーブルのデータを作成
+            postal_code: @order.postal_code,
+            address: @order.address,
+            name: @order.delivery_name
+          )
+        end
+        current_member.cart_items.destroy_all #カート内商品を全て削除
         redirect_to public_orders_thanks_path
       else
         flash[:notice] = "登録に失敗しました"
@@ -93,7 +93,15 @@ class Public::OrdersController < ApplicationController
   def thanks
   end
 
-  private
+    private
+    def set_cart_items
+      @cart_items = current_member.cart_items
+    end
+
+    def set_order
+      @order = current_member.orders.build(order_params)
+    end
+
     def order_params
       params.require(:order).permit(:total_fee, :postage, :pay_type, :postal_code, :address, :delivery_name, :order_status)
     end
