@@ -17,8 +17,6 @@ class Public::MembersController < ApplicationController
     end
 
     def confirm
-    	@member = current_member
-    	@member.update(leave_status: true)
     end
 
     def hide
