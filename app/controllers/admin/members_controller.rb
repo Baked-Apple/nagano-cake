@@ -27,5 +27,4 @@ class Admin::MembersController < ApplicationController
       params.require(:member).permit(:last_name, :first_name, :kana_last_name, :kana_first_name, :postal_code, :address, :phone_number, :email, :leave_status)
     end
 
-
 end

@@ -4,47 +4,47 @@
   <%= render "members/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <%= f.label :名前 %>
+    <%= f.label :名前, class: "col-xs-4" %>
     <%= f.label :"(姓)"%><%= f.text_field :last_name, autofocus: true %>
     <%= f.label :"(名)" %><%= f.text_field :first_name, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :フリガナ %>
+    <%= f.label :フリガナ, class: "col-xs-4" %>
     <%= f.label :"(セイ)"%><%= f.text_field :kana_last_name, autofocus: true %>
     <%= f.label :"(メイ)" %><%= f.text_field :kana_first_name, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :メールアドレス %>
+    <%= f.label :メールアドレス, class: "col-xs-4" %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :郵便番号（ハイフンなし）%>
+    <%= f.label :郵便番号（ハイフンなし）, class: "col-xs-4" %>
     <%= f.text_field :postal_code, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :住所 %>
+    <%= f.label :住所, class: "col-xs-4" %>
     <%= f.text_field :address, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :電話番号（ハイフンなし） %>
+    <%= f.label :電話番号（ハイフンなし）, class: "col-xs-4" %>
     <%= f.text_field :phone_number, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :パスワード %>
+    <%= f.label :パスワード, class: "col-xs-4" %>
+    <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.label :パスワード（確認用） %>
+    <%= f.label :パスワード（確認用）, class: "col-xs-4" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
