@@ -13,15 +13,12 @@
     <!-- Header -->
     <header class = "navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-          <%= link_to(public_top_path, class:"header-logo") do %>
-          
+          <%= link_to(root_path, class:"header-logo") do %>
           <nav class="nav navbar-nav navbar-left">
               <%= image_tag 'Apple.jpg' %>
           </nav>
-
-          
-          
           <% end %>
+
         <ul class="nav navbar-nav navbar-right">
           <% if admin_signed_in? %>
             <li><%= link_to '商品一覧', admin_items_path %></li>

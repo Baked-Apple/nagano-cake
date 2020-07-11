@@ -27,8 +27,8 @@ class Public::MembersController < ApplicationController
 		@member.update(leave_status: true)
 		# #ログアウトさせる
 		reset_session
-		#トップページにリダイレクト(後でルートパスに変更)
-		redirect_to public_top_path
+		#トップページにリダイレクト
+		redirect_to root_path
 	end
 
     private

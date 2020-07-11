@@ -26,11 +26,7 @@ class Public::ItemsController < ApplicationController
 		@item = Item.find(params[:id])
     	@cart_item = CartItem.new(item_id: @item.id)
     	@genres = Genre.all
-		
 	end
 
-	
-
-	
 end
 
