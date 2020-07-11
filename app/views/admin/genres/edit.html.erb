@@ -4,14 +4,14 @@
 
 			<!-- error-message -->
 			<% if @genre.errors.any? %>
-			<div class="error_explanation">
-			  <h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
-			  <ul>
-			  <% @genre.errors.full_messages.each do |message| %>
-			    <li><%= message %></li>
-			  <% end %>
-			  </ul>
-		    </div>
+				<div class="error_explanation">
+					<h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
+					<ul>
+						<% @genre.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
 			<% end %>
 
 			<h2>ジャンル編集画面</h2>
@@ -29,10 +29,10 @@
 						<label>ステータス</label>
 					</div>
 					<div class="col-xs-8">
+						<%= f.radio_button :invalid_status, 0, checked: true %>
 						<%= f.label :genre, "有効", for: "genre_active_status_有効" %>
-						<%= f.radio_button :invalid_status, :"有効", :checked => (@genre.invalid_status == "有効") %>
+						<%= f.radio_button :invalid_status, 1 %>
 						<%= f.label :name, "無効", for: "genre_active_status_無効" %>
-						<%= f.radio_button :invalid_status, :"無効", :checked => (@genre.invalid_status == "無効") %>
 					</div>
 				</div>
 
