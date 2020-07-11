@@ -10,9 +10,24 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
+//= require jquery.turbolinks
+//= require rails-ujs
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+	$(document).on('turbolinks:load', () => {
+		$('#member_postal_code').jpostal({
+			postcode : [
+			'#member_postal_code'
+			],
+
+			address: {
+				"#member_address": "%3%4%5%6%7"
+			}
+		});
+	});
+});

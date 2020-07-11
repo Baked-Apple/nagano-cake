@@ -1,39 +1,48 @@
 <h3>登録情報編集</h3>
 
 <%= form_for(@member, url: public_mypage_path) do |f| %>
-  <div class="form-group">
-    <%= f.label :名前, class: "col-xs-4" %>
-    <%= f.label :"(姓)"%><%= f.text_field :last_name, autofocus: true %>
-    <%= f.label :"(名)" %><%= f.text_field :first_name, autofocus: true %>
-  </div>
+  <div class="col-sm-6">
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <%= f.label :名前 %>
+        <%= f.label :"(姓)"%><%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.label :"(名)" %><%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :フリガナ, class: "col-xs-4" %>
-    <%= f.label :"(セイ)"%><%= f.text_field :kana_last_name, autofocus: true %>
-    <%= f.label :"(メイ)" %><%= f.text_field :kana_first_name, autofocus: true %>
-  </div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <%= f.label :フリガナ %>
+        <%= f.label :"(セイ)"%><%= f.text_field :kana_last_name, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.label :"(メイ)" %><%= f.text_field :kana_first_name, autofocus: true, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :メールアドレス, class: "col-xs-4" %>
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :メールアドレス  %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :郵便番号（ハイフンなし）, class: "col-xs-4"%>
-    <%= f.text_field :postal_code, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :郵便番号（ハイフンなし） %>
+      <%= f.text_field :postal_code, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :住所, class: "col-xs-4" %>
-    <%= f.text_field :address, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :住所 %>
+      <%= f.text_field :address, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :電話番号（ハイフンなし）, class: "col-xs-4" %>
-    <%= f.text_field :phone_number, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :電話番号（ハイフンなし）%>
+      <%= f.text_field :phone_number, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="actions row">
+  <div class="actions">
       <%= f.submit '編集内容を保存する',　class:"data-disable-with" %>
       <%= link_to '退会する', public_confirm_path %>
   </div>
