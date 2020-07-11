@@ -12,7 +12,7 @@ class Public::MembersController < ApplicationController
 	def update
 		@member = current_member
 		if @member.update(member_params)
-			redirect_to public_mypage_path(current_member)
+			redirect_to public_mypage_path(current_member), notice:'アカウント情報を更新しました'
 		else
 			render :edit
 		end

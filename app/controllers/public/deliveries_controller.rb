@@ -24,7 +24,7 @@ class Public::DeliveriesController < ApplicationController
 	def update
 		@delivery = Delivery.find(params[:id])
 		if @delivery.update(delivery_params)
-			redirect_to public_deliveries_path
+			redirect_to public_deliveries_path, notice:'配送情報を更新しました'
 		else
 			render :edit
 		end
@@ -33,7 +33,7 @@ class Public::DeliveriesController < ApplicationController
 	def destroy
 		delivery = Delivery.find(params[:id])
 		delivery.destroy
-		redirect_to public_deliveries_path
+		redirect_to public_deliveries_path, notice:'配送情報を削除しました'
 	end
 
 	private
