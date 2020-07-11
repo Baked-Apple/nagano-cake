@@ -1,3 +1,13 @@
 // Place all the styles related to the public/home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.text {
+	height: 650px;
+	background: image-url('cake.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-color:rgba(255,255,255,0.4);
+	background-blend-mode:lighten;
+	font-size: 30px;
+}

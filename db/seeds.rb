@@ -11,4 +11,28 @@ Admin.create(
 	password: "adminadmin"
 	)
 
-Genre.create([{genre: "ケーキ",invalid_status: 0,}, {genre: "プリン",invalid_status: 0,}, {genre: "焼き菓子",invalid_status: 0,}, {genre: "キャンディ",invalid_status: 0,}])
+Genre.create!(
+	[
+		{
+			genre: "ケーキ",invalid_status: 0,
+		},
+		{
+			genre: "プリン",invalid_status: 0,
+		},
+		{
+			genre: "焼き菓子",invalid_status: 0,
+		},
+		{
+			genre: "キャンディ",invalid_status: 0,
+		}
+	]
+	)
+
+Item.create!(
+	[
+		{
+			genre_id: 1,name:"いちごのショートケーキ",introduction:"甘いいちごのショートケーキです",price:"1000",image: File.open('./app/assets/images/shortcake.jpg')
+		}
+	]
+
+	)
