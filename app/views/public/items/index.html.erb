@@ -1,6 +1,4 @@
-<header>
-	<%= render 'public/header' %>
-</header><!-- /header -->
+
 
 <div class="container">
   <div class="row">
@@ -31,11 +29,16 @@
 
           <%= render 'item_list', items: @q_items %>
 
+<<<<<<< HEAD
           <div class="row text-center">
             <%= paginate @q_items, class: "paginate" %>
           </div>
         </div>
         <% else %>
+=======
+				<%= link_to item.name, public_item_path(item.id) %>
+				<%= item.price %>
+>>>>>>> a69c1e63364a20f420c48ab5e009ca18625b8693
 
         <% end %>
       </div>

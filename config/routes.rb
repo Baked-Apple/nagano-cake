@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'orders/confirm' => 'orders#confirm'
     get 'orders/thanks' => 'orders#thanks'
   	resources :orders, only: [:new, :index, :show, :create]
+<<<<<<< HEAD
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :items, only: [:index, :show, :create] do
       get 'search', on: :collection
@@ -30,6 +31,11 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :update, :destroy]
     
     
+=======
+    resources :items, only: [:index, :show, :create] do
+      resources :cart_items, only: [:index, :create, :update, :destroy]
+    end
+>>>>>>> a69c1e63364a20f420c48ab5e009ca18625b8693
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
   end
 

@@ -16,12 +16,18 @@ class Admin::ItemsController < ApplicationController
 	end
 
 	def create
+<<<<<<< HEAD
 			@item = Item.new(item_params)
 			if @item.save
 					redirect_to admin_item_path(@item.id), notice:'商品を作成しました'
 			else
 					render 'new'
 			end
+=======
+		@item = Item.new(item_params)
+		@item.save!
+		redirect_to admin_item_path(@item.id)
+>>>>>>> a69c1e63364a20f420c48ab5e009ca18625b8693
 	end
 
 	def edit

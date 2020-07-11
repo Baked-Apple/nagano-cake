@@ -2,6 +2,7 @@
 	<%= render 'admin/header' %>
 </header><!-- /header -->
 
+<<<<<<< HEAD
 <div class="container">
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
@@ -59,4 +60,45 @@
       </div>
     </div>
   </div>
+=======
+<div class="row">
+	<div class="container">
+
+		<div class="col-xs-5">
+
+			<h2>商品新規登録</h2>
+
+			<%= form_for(@item, url:admin_items_path) do |f| %>
+
+				
+				<%= f.attachment_field :image %>
+
+			
+			
+		</div>
+
+				<div class="col-xs-7">
+
+					<%= f.label "商品名" %>
+					<%= f.text_field :name %>
+
+					<%= f.label "商品説明" %>
+					<%= f.text_area :introduction %>
+
+					<%= f.label "ジャンル" %>
+					<%= f.select :genre_id, {'ケーキ': 1, '和菓子': 2, '焼き菓子': 3}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+
+					<%= f.label "税抜価格" %>
+					<%= f.text_field :price %>
+
+					<%= f.label "販売ステータス" %>
+					<%= f.select :sale_status, {'販売中': 0, '売り切れ': 1}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+
+					<%= f.submit '新規登録' %>
+
+			
+				</div>
+			<% end %>
+	</div>
+>>>>>>> a69c1e63364a20f420c48ab5e009ca18625b8693
 </div>
