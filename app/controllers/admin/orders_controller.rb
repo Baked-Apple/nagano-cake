@@ -1,5 +1,6 @@
 class Admin::OrdersController < ApplicationController
-
+	before_action :authenticate_admin!
+	
 	# today,member,allで分岐して表示内容を変更
 	def index
 		case params[:order]
@@ -21,26 +22,26 @@ class Admin::OrdersController < ApplicationController
 	def show
 		@order = Order.find(params[:id])
 		case @order.pay_type
-	    when "credit" then
-	      @pay = "クレジットカード"
-	    when "bank" then
-	      @pay = "銀行振込"
-	    end
-    end
+			when "credit" then
+				@pay = "クレジットカード"
+			when "bank" then
+				@pay = "銀行振込"
+			end
+	end
 
 	def update
 		@order = Order.find(params[:id])
 		order_items = @order.order_items.all
 		if @order.update(order_params)
 			# 注文状況が１＝入金確認になったら、製作待ち１に
-		 	if @order.order_status == "confirmed"
-		 		order_items.each do |order_item|
-		 		order_item.update(product_status: 1)
-		 	end
-		 	end
-		 	redirect_to admin_order_path(@order.id)
+			if @order.order_status == "confirmed"
+				order_items.each do |order_item|
+					order_item.update(product_status: 1)
+				end
+			end
+			redirect_to admin_order_path(@order.id)
 		end
-    end
+	end
 
 	private
     def order_params

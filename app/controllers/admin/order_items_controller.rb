@@ -1,5 +1,6 @@
 class Admin::OrderItemsController < ApplicationController
-
+	before_action :authenticate_admin!
+	
 	def update
 		@order_item = OrderItem.find(params[:id])
 		# order_itemに紐づくorderを代入
@@ -14,10 +15,11 @@ class Admin::OrderItemsController < ApplicationController
 			@order.update(order_status: 3)
 		end
 		redirect_to admin_order_path(@order.id)
-    end
+  end
 
+		private
     def order_item_params
-    	params.require(:order_item).permit(:product_status)
-	end
+			params.require(:order_item).permit(:product_status)
+		end
 
 end

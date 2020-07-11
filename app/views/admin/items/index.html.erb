@@ -22,7 +22,7 @@
               <td><%= link_to item.name, admin_item_path(item.id) %></td>
               <td><%= "#{item.price}円" %></td>
               <td><%= item.genre.genre %></td>
-              <td><%= item.sale_status ? "販売中" : "売り切れ" %></td>
+              <td><%= item.sale_status == 0 ? "売切れ" : "販売中" %></td>
             </tr>
             <% end %>
           </tbody>

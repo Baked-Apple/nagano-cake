@@ -6,14 +6,14 @@
 
 			<!-- error-message -->
 			<% if @genre.errors.any? %>
-			<div class="error_explanation genre-error">
-			  <h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
-			  <ul>
-			  <% @genre.errors.full_messages.each do |message| %>
-			    <li><%= message %></li>
-			  <% end %>
-			  </ul>
-		    </div>
+				<div class="error_explanation genre-error">
+					<h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
+					<ul>
+						<% @genre.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
 			<% end %>
 
 			<!-- new genre form -->
@@ -21,10 +21,10 @@
 				<%= form_for [:admin, @genre] do |f| %>
 					<%= f.label :genre, "ジャンル" %>
 					<%= f.text_field :genre %>
+					<%= f.radio_button :invalid_status, "有効", checked: true %>
 					<%= f.label :genre, "有効" %>
-					<%= f.radio_button :invalid_status, :"有効", checked: true %>
+					<%= f.radio_button :invalid_status, "無効" %>
 					<%= f.label :name, "無効" %>
-					<%= f.radio_button :invalid_status, :"無効" %>
 					<%= f.submit '追加', class:"btn btn-primary" %>
 				<% end %>
 			</div>

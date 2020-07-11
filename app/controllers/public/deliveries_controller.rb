@@ -1,7 +1,9 @@
 class Public::DeliveriesController < ApplicationController
+	before_action :authenticate_member!
+	
 	def index
 		@delivery = Delivery.new
-		@deliveries = Delivery.all
+		@deliveries = current_member.deliveries
 	end
 
 	def create
@@ -10,7 +12,7 @@ class Public::DeliveriesController < ApplicationController
 		if @delivery.save
 			redirect_to public_deliveries_path
 		else
-			@deliveries = Delivery.all
+			@deliveries = current_member.deliveries
 			render :index
 		end
 	end
