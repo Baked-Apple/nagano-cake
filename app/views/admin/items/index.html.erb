@@ -25,6 +25,7 @@
               <td><%= item.sale_status == 0 ? "売切れ" : "販売中" %></td>
             </tr>
             <% end %>
+            <%= paginate @items %>
           </tbody>
         </table>
         
