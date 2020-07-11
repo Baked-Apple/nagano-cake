@@ -17,7 +17,7 @@
         <div class="row">
           <%= form_for [:admin, @item] do |f| %>
           <div class="col-xs-5">
-            <h2>商品編集画面</h2>
+            <h3>商品編集画面</h3>
             <%= f.attachment_field :image %>
             <%= attachment_image_tag @item, :image, :size => '350x300', id: "file-preview" %>
           </div>

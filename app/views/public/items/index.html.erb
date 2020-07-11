@@ -9,7 +9,7 @@
         <%# 商品一覧 %>
         <% if @items.count > 0 %>
         <% if @item_genre.present? %>
-        <h2 class="top-genre-name-title"><%= @item_genre.genre %></h2>
+        <h3 class="top-genre-name-title"><%= @item_genre.genre %></h3>
         <% end %>
         <p><%="全#{@items.total_count}件中" + "(#{@items.count}件表示)" %></p>
         <%= render 'item_list', items: @items %>

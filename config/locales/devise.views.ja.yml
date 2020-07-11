@@ -11,9 +11,16 @@ ja:
         current_sign_in_ip: 現在のログインIPアドレス
         email: メールアドレス
         encrypted_password: 暗号化パスワード
-        failed_attempts: 失敗したログイン試行回数
-        last_sign_in_at: 最終ログイン時刻
-        last_sign_in_ip: 最終ログインIPアドレス
+        email: メールアドレス
+        password:
+        last_name: 名前(姓)
+        first_name: 名前(名)
+        kana_last_name: フリガナ(セイ)
+        kana_first_name: フリガナ(メイ)
+        postal_code: 郵便番号
+        address: 住所
+        phone_number: 電話番号
+        current_password: 現在のパスワード
         locked_at: ロック時刻
         password: パスワード
         password_confirmation: パスワード（確認用）
@@ -31,14 +38,16 @@ ja:
       models:
         member:
           attributes:
-            email:
-              blank: を入力してください
+            email: メールアドレス
             password:
-              blank: を入力してください
-            name:
-              blank: を入力してください
-            current_password:
-              blank: を入力してください
+            last_name: 妙字
+            first_name: 名前
+            kana_last_name: 妙字(カナ)
+            kana_first_name: 名前(カナ)
+            postal_code: 郵便番号
+            address: 住所
+            phone_number: 電話番号
+            current_password: 現在のパスワード
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

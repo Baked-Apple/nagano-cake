@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'public/home#top'
+
   devise_for :members, controllers:{
     sessions: 'public/sessions',
     passwords: 'public/passwords',
@@ -13,7 +15,6 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    get 'top' => 'home#top'
     get 'about' => 'home#about'
     get 'confirm' => 'members#confirm'
     put 'confirm' => 'members#hide'
@@ -28,8 +29,6 @@ Rails.application.routes.draw do
       get 'search', on: :collection
     end
     resources :cart_items, only: [:index, :create, :update, :destroy]
-    
-    
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
   end
 

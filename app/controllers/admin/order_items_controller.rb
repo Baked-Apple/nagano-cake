@@ -14,7 +14,7 @@ class Admin::OrderItemsController < ApplicationController
 		elsif @order.order_items.all?{|n|n.product_status == "done"}
 			@order.update(order_status: 3)
 		end
-		redirect_to admin_order_path(@order.id)
+		redirect_to admin_order_path(@order.id), notice:'ステータスを更新しました'
   end
 
 		private

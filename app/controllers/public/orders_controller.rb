@@ -39,7 +39,7 @@ class Public::OrdersController < ApplicationController
     end
 
     @order.delivery_info = params[:order][:delivery_info]
-    case @order.delivery_info 
+    case @order.delivery_info
     when "self_addr" then
       @order.postal_code = current_member.postal_code
       @order.address = current_member.address
@@ -86,7 +86,7 @@ class Public::OrdersController < ApplicationController
         flash[:notice] = "登録に失敗しました"
         redirect_to public_orders_new_path
       end
-    end  
+    end
   end
 
   # 注文完了(サンクス)
