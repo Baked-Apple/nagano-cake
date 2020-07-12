@@ -2,7 +2,7 @@
   <div class="form-group row">
     <div class="col-xs-12">
       <%= f.label :order_status_eq, :注文ステータス %><br>
-      <%= f.select :order_status_eq, Order.order_statuses.map{|k, v| [Order.order_statuses_i18n[k], v]} %>
+      <%= f.select :order_status_eq, Order.order_statuses.map{|k, v| [Order.order_statuses_i18n[k], v]}, include_blank: "--選択してください--" %>
       <%= hidden_field_tag :order, 'all' %>
     </div>
   </div>

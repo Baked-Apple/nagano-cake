@@ -15,7 +15,7 @@
       <%# 検索該当ありの場合 %>
       <div class="col-sm-9">
         <h3>注文履歴一覧</h3>
-        <p><%="#{@q_orders.total_count}件の注文を表示" %></p>
+        <p><%="全#{@q_orders.total_count}件中" + "(#{@q_orders.count}件表示)" %></p>
         <%= render 'order_list', orders: @q_orders %>
         <div class="row text-center">
           <%= paginate @q_orders, class: "paginate" %>
