@@ -18,9 +18,10 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-// 住所自動入力機能
+
 $(function() {
 	$(document).on('turbolinks:load', () => {
+		// 住所自動入力機能
 		$('#member_postal_code').jpostal({
 			postcode : [
 			'#member_postal_code'
@@ -48,21 +49,22 @@ $(function() {
 				"#order_address": "%3%4%5%6%7"
 			}
 		});
+		// inputのidから情報の取得
+	    $('#item_image').on('change', function (e) {
+		// ここから既存の画像のurlの取得
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	        $(".image").attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(e.target.files[0]); //取得したurlにアップロード画像のurlを挿入
+		});
+
+		// トップ・おすすめ
+		$('.slider').bxSlider({
+	        auto: true,
+	        pause: 5000,
+	        touchEnabled:false,
+	    });
 	});
 });
-
-
-$(function(){
-    // inputのidから情報の取得
-    $('#product-img').on('change', function (e) {
-// ここから既存の画像のurlの取得
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $(".product-img").attr('src', e.target.result);
-    }
-// ここまで
-    reader.readAsDataURL(e.target.files[0]); //取得したurlにアップロード画像のurlを挿入
-});
-});
-
 
