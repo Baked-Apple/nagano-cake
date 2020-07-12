@@ -17,8 +17,8 @@
         <%= form_for(@item, url: admin_items_path) do |f| %>
         <div class="col-xs-5">
           <h3>商品登録画面</h3>
-          <div class="product-img">
-            <%= attachment_image_tag(@item, :image, size:"350x300", fallback: "no-image.png") %>
+          <div class="item_image">
+            <%= attachment_image_tag @item, :image, class: "img-square", size:"350x300", fallback: "no-image.png" %>
           </div>
           <%= f.attachment_field :image %>
         </div>
