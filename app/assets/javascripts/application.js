@@ -29,5 +29,23 @@ $(function() {
 				"#member_address": "%3%4%5%6%7"
 			}
 		});
+		$('#delivery_postal_code').jpostal({
+			postcode : [
+			'#delivery_postal_code'
+			],
+
+			address: {
+				"#delivery_address": "%3%4%5%6%7"
+			}
+		});
+		$('#order_postal_code').jpostal({
+			postcode : [
+			'#order_postal_code'
+			],
+
+			address: {
+				"#order_address": "%3%4%5%6%7"
+			}
+		});
 	});
 });

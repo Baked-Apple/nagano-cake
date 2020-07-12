@@ -35,7 +35,7 @@
 			<p>郵便番号(ハイフンなし)</p>
 			<%= f.text_field :postal_code, class: "form-control" %><br>
 			<p>住所</p>
-			<%= f.text_field :address, class: "form-control" %><br>
+			<%= f.text_field :address, class: "form-control", collection: JpPrefecture::Prefecture.all, :value_method => :name %><br>
 			<p>宛名</p>
 			<%= f.text_field :delivery_name, class: "form-control" %><br>
 		</div>
