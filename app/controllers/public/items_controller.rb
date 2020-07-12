@@ -2,21 +2,21 @@ class Public::ItemsController < ApplicationController
 	def index
     if params[:genre_id].present?
       @items = Item.where(genre_id: params[:genre_id])
-      .page(params[:page]).per(16).reverse_order
+      .page(params[:page]).per(10)
 
       @item_genre = @items.first.genre if @items.count > 0
     else
       # ジャンルが無効になっている商品は一覧に表示しない
       @items = Item
         .joins(:genre).where(genres: {invalid_status: 0})
-        .page(params[:page]).per(16).reverse_order
+        .page(params[:page]).per(10)
     end
     @genres = Genre.all
   end
 
   def search
     #
-    @q_items = @q.result.page(params[:page]).per(16).reverse_order
+    @q_items = @q.result.page(params[:page]).per(10)
     @genres = Genre.all
 
     render :index

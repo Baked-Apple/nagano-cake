@@ -14,7 +14,7 @@ class Admin::OrdersController < ApplicationController
 			@orders = @member.orders.all
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
-			@orders = Order.all
+			@orders = Order.page(params[:page]).reverse_order
 		end
 	end
 
