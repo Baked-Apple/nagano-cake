@@ -14,8 +14,13 @@ class Admin::OrdersController < ApplicationController
 			@orders = @member.orders.page(params[:page])
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
-			@orders = Order.page(params[:page]).reverse_order
-		end
+
+      @orders = Order.page(params[:page]).reverse_order
+			# 検索オブジェクト
+				@search = Order.ransack(params[:q])
+				# 検索結果
+				@q_orders = @search.result.page(params[:page])
+    end
 	end
 
 

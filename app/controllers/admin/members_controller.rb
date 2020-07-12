@@ -2,7 +2,11 @@ class Admin::MembersController < ApplicationController
 	before_action :authenticate_admin!
 	
 	def index
-		@members = Member.page(params[:page])
+	  @members = Member.page(params[:page])
+		# 検索オブジェクト
+    @search = Member.ransack(params[:q])
+    # 検索結果
+    @q_members = @search.result.page(params[:page])
 	end
 
 	def show

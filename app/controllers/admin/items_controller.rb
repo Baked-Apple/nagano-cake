@@ -3,6 +3,11 @@ class Admin::ItemsController < ApplicationController
 
 	def index
 		@items = Item.page(params[:page])
+
+		# 検索オブジェクト
+		@search = Item.ransack(params[:q])
+    # 検索結果
+			@q_items = @search.result.page(params[:page])
 	end
 
 	def show

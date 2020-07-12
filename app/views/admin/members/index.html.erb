@@ -1,29 +1,27 @@
-<h3>会員一覧</h3>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
+<div class="col-sm-3">
+  <h3>詳細検索</h3>
+  <h4><%= link_to "全会員を表示", admin_members_path %></h4>
+  <%= render 'search', search: @search %>
+</div>
 
-  <tbody>
-    <% @members.each do |member| %>
-    <tr>
-    	<td><%= member.id %></td>
-        <td><%= link_to member.last_name+member.first_name, admin_member_path(member.id) %></td>
-        <td><%= member.email %></td>
-        <td>
-          <% if member.leave_status == 1 %>
-          <p>退会済み</p>
-          <% else %>
-          <p>有効</p>
-          <% end %>
-        </td>
-    </tr>
+<% if @q_members %>
+  <%# 検索の場合 %>
+  <div class="member-content">
+    <% if @q_members.empty? %>
+      <div class="col-sm-9">
+        <h3>会員一覧</h3>
+        <p class="top-empty-message">条件に合う会員が見つかりませんでした</p>
+      </div>
+    <% else %>
+      <%# 一覧表示の場合 %>
+      <div class="col-sm-9">
+        <h3>会員一覧</h3>
+        <p><%="#{@q_members.total_count}件の会員を表示" %></p>
+        <%= render 'member_list', members: @q_members %>
+        <div class="row text-center">
+          <%= paginate @q_members, class: "paginate" %>
+        </div>
+      </div>
     <% end %>
-    <%= paginate @members %>
-  </tbody>
-</table>
+  </div>
+<% end %>
