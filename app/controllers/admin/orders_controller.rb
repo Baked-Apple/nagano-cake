@@ -11,7 +11,7 @@ class Admin::OrdersController < ApplicationController
 		when 'member'
 			member_id = Rails.application.routes.recognize_path(request.referer)[:id]
 			@member = Member.find(member_id)
-			@orders = @member.page(params[:page])
+			@orders = @member.orders.page(params[:page])
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
 			@orders = Order.page(params[:page]).reverse_order
