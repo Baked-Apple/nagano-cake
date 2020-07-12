@@ -17,12 +17,17 @@
  @import "bootstrap";
 
 
- header{
+header{
 	color:white;
-	.navbar-left{
-		span{
-			font-size:20px;
-			padding-top:10px;
+	background-color: white;
+	padding-top: 0;
+	border-top: 1px #d4cdcb solid;
+	border-bottom: 1px #d4cdcb solid;
+	
+	.navbar-right{
+		a {
+			color: #9f9897;
+			text-decoration: none;
 		}
 	}	
 }
@@ -31,3 +36,20 @@
 	margin-top:51px;
 }
 
+.wrapper{
+	min-height: 100vh;
+	position: relative;/*←相対位置*/
+	padding-bottom: 120px;/*←footerの高さ*/
+	box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+footer{
+	width: 100%;
+	background-color: #d4cdcb;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0;
+
+	position: absolute;/*←絶対位置*/
+	bottom: 0; /*下に固定*/
+}

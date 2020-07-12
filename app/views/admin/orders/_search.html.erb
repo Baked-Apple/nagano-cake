@@ -1,0 +1,12 @@
+<%= search_form_for @search, url: admin_orders_path do |f| %>
+  <div class="form-group row">
+    <div class="col-xs-12">
+      <%= f.label :order_status_eq, :注文ステータス %><br>
+      <%= f.select :order_status_eq, Order.order_statuses.map{|k, v| [Order.order_statuses_i18n[k], v]} %>
+      <%= hidden_field_tag :order, 'all' %>
+    </div>
+  </div>
+  <div class="order_search_btns">
+    <%= f.submit "検索", class:"btn btn-info" %>
+  </div>
+<% end %>
