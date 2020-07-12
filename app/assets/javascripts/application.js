@@ -14,13 +14,12 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require rails-ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
 
 $(function() {
-	$(document).on('turbolinks:load', () => {
+	$(window).on('load', () => {
 		// 住所自動入力機能
 		$('#member_postal_code').jpostal({
 			postcode : [

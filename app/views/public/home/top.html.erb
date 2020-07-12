@@ -14,28 +14,28 @@
 			</h4>
 		</div>
 
-			<div class="row product-card-content">
-				<h4>おすすめ商品</h4>
-				    <div class="col-xs-4">
-						<div class="slider">
-							<% @all_ranks.each do |item| %>
-								<%= link_to public_item_path(item.id) do %>
-									<div class="thumbnail product-thumbnail col-xs-12">
-										<%= attachment_image_tag item, :image, :size => '300x300' %>
-										<div class="caption">
-											<p><%= item.name %></p>
-											<p>¥ <%= (item.price * 1.1).floor %></p>
-											<% if item.sale_status == 0 %>
-												<p class="item-sale-status">売切れ</p>
-											<% else %>
-												<p class="item-sale-status">販売中</p>
-											<% end %>
-										</div>
+		<div class="row product-card-content">
+			<h4>おすすめ商品</h4>
+			    <div class="col-xs-4">
+					<div class="slider">
+						<% @all_ranks.each do |item| %>
+							<%= link_to public_item_path(item.id) do %>
+								<div class="thumbnail product-thumbnail col-xs-12">
+									<%= attachment_image_tag item, :image, :size => '300x300' %>
+									<div class="caption">
+										<p><%= item.name %></p>
+										<p>¥ <%= (item.price * 1.1).floor %></p>
+										<% if item.sale_status == 0 %>
+											<p class="item-sale-status">売切れ</p>
+										<% else %>
+											<p class="item-sale-status">販売中</p>
+										<% end %>
 									</div>
-								<% end %>
+								</div>
 							<% end %>
-						</div>
-				    </div>
-			</div>
+						<% end %>
+					</div>
+			    </div>
+		</div>
 	</div>
 </div>
