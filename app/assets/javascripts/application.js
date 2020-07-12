@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+// 住所自動入力機能
 $(function() {
 	$(document).on('turbolinks:load', () => {
 		$('#member_postal_code').jpostal({
@@ -49,3 +50,19 @@ $(function() {
 		});
 	});
 });
+
+
+$(function(){
+    // inputのidから情報の取得
+    $('#product-img').on('change', function (e) {
+// ここから既存の画像のurlの取得
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $(".product-img").attr('src', e.target.result);
+    }
+// ここまで
+    reader.readAsDataURL(e.target.files[0]); //取得したurlにアップロード画像のurlを挿入
+});
+});
+
+
