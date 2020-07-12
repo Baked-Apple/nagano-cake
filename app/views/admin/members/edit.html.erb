@@ -26,7 +26,7 @@
 
   <div class="form-group">
     <%= f.label :住所, class: "col-xs-4" %>
-    <%= f.text_field :address, autofocus: true %>
+    <%= f.text_field :address, autofocus: true, collection: JpPrefecture::Prefecture.all, :value_method => :name %>
   </div>
 
   <div class="form-group">

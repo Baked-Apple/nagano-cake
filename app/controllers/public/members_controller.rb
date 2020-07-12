@@ -12,7 +12,7 @@ class Public::MembersController < ApplicationController
 	def update
 		@member = current_member
 		if @member.update(member_params)
-			redirect_to public_mypage_path(current_member)
+			redirect_to public_mypage_path(current_member), notice:'アカウント情報を更新しました'
 		else
 			render :edit
 		end
@@ -27,8 +27,8 @@ class Public::MembersController < ApplicationController
 		@member.update(leave_status: true)
 		# #ログアウトさせる
 		reset_session
-		#トップページにリダイレクト(後でルートパスに変更)
-		redirect_to public_top_path
+		#トップページにリダイレクト
+		redirect_to root_path
 	end
 
     private

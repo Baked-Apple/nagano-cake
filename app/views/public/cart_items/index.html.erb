@@ -1,10 +1,8 @@
 <div class="container">
 	<div class="row">
 		<div class="ec-cart-index-main">
-			<h2 class="ec-cart-index-title">ショッピングカート</h2>
-			
-			
-			
+			<h3 class="ec-cart-index-title">ショッピングカート</h3>
+
 			<div class="btn-box text-right">
 				<%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
 			</div>
@@ -31,12 +29,6 @@
 										<%= f.select :quantity,(1..10).to_a, {}, class: "form-control" %>
 										<%= f.submit "変更", class:"btn btn-primary" %>
 								<% end %>
-									
-										
-									
-								
-
-
 							</td>
 							<td class="text-right">¥ <%= cart_item.quantity * (cart_item.item.price * 1.1).floor %></td>
 							<td class="text-right"><%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger" %></td>
@@ -47,7 +39,7 @@
 			</div>
 			<!-- 合計金額 -->
 			<div class="cart-total-table row">
-				<div class="col-xs-8 return-shopping-btn-wrapper"><%= link_to "トップページに戻る", public_top_path, class:"btn btn-default" %></div>
+				<div class="col-xs-8 return-shopping-btn-wrapper"><%= link_to "トップページに戻る", root_path, class:"btn btn-default" %></div>
 				<div class="col-xs-4">
 					<table class="table">
 						<tbody>

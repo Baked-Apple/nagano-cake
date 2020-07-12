@@ -2,7 +2,7 @@ class Admin::MembersController < ApplicationController
 	before_action :authenticate_admin!
 	
 	def index
-		@members = Member.all
+	  @members = Member.page(params[:page])
 		# 検索オブジェクト
     @search = Member.ransack(params[:q])
     # 検索結果
@@ -20,7 +20,7 @@ class Admin::MembersController < ApplicationController
 	def update
 		@member = Member.find(params[:id])
 		if @member.update(member_params)
-			redirect_to admin_member_path(@member)
+			redirect_to admin_member_path(@member), notice:'アカウント情報を更新しました'
 		else
 			render 'edit'
 		end

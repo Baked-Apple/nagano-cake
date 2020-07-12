@@ -14,13 +14,13 @@ class Admin::OrdersController < ApplicationController
 			@orders = @member.orders.page(params[:page])
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
-			@orders = Order.page(params[:page])
-			# 検索オブジェクト
 
+      @orders = Order.page(params[:page]).reverse_order
+			# 検索オブジェクト
 				@search = Order.ransack(params[:q])
 				# 検索結果
 				@q_orders = @search.result.page(params[:page])
-		end
+    end
 	end
 
 
@@ -44,7 +44,7 @@ class Admin::OrdersController < ApplicationController
 					order_item.update(product_status: 1)
 				end
 			end
-			redirect_to admin_order_path(@order.id)
+			redirect_to admin_order_path(@order.id), notice:'ステータスを更新しました'
 		end
 	end
 

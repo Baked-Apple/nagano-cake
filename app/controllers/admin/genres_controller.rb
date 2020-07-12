@@ -3,7 +3,7 @@ class Admin::GenresController < ApplicationController
 	
 	def index
 		@genre = Genre.new
-		@genres = Genre.all
+		@genres = Genre.page(params[:page])
 	end
 
 	def create
@@ -23,8 +23,9 @@ class Admin::GenresController < ApplicationController
 
 	def update
 		@genre = Genre.find(params[:id])
+		items = @genre.items.all
 		if @genre.update(genre_params)
-			flash[:notice] = "You have edited genre successfully."
+			flash[:notice] = "ジャンル情報を編集しました"
 			redirect_to admin_genres_path
 		else
 			render action: :edit
