@@ -20,7 +20,7 @@
     <%# 検索該当ありの場合 %>
       <div class="col-sm-9">
         <h3>商品一覧</h3>
-        <p><%="#{@q_items.total_count}件の商品を表示" %></p>
+        <p><%="全#{@q_items.total_count}件中" + "(#{@q_items.count}件表示)" %></p>
         <%= render 'item_list', items: @q_items %>
         <div class="row text-center">
           <%= paginate @q_items, class: "paginate" %>
