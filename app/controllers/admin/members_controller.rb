@@ -3,6 +3,10 @@ class Admin::MembersController < ApplicationController
 	
 	def index
 		@members = Member.all
+		# 検索オブジェクト
+    @search = Member.ransack(params[:q])
+    # 検索結果
+    @q_members = @search.result.page(params[:page])
 	end
 
 	def show

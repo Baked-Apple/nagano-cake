@@ -1,0 +1,27 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% members.each do |member| %>
+    <tr>
+      <td><%= member.id %></td>
+        <td><%= link_to member.last_name+member.first_name, admin_member_path(member.id) %></td>
+        <td><%= member.email %></td>
+        <td>
+          <% if member.leave_status == 1 %>
+          <p>退会済み</p>
+          <% else %>
+          <p>有効</p>
+          <% end %>
+        </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

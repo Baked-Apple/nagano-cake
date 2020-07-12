@@ -1,32 +1,41 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h2>商品一覧画面</h2>
-      <div class="new-btn-wrap">
-        <%= link_to "商品登録", new_admin_item_path, class: "btn btn-primary btn-new-register btn-lg"; %>
+<div class="col-sm-3">
+  <h3>詳細検索</h3>
+  <h4><%= link_to "全商品を表示", admin_items_path %></h4>
+  <%= render 'search', search: @search %>
+  <h3>商品を登録する</h3>
+  <div class="new-btn-wrap">
+    <%= link_to "商品登録", new_admin_item_path, class: "btn btn-primary btn-new-register btn-lg"; %>
+  </div>
+</div>
+
+<% if @q_items %>
+  <%# 検索該当なしの場合 %>
+  <div class="item-content">
+    <% if @q_items.empty? %>
+      <div class="col-sm-9">
+        <h3>商品一覧</h3>
+        <p class="top-empty-message">条件に合う商品が見つかりませんでした</p>
       </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>商品ID</th>
-              <th>商品名</th>
-              <th>税抜き価格</th>
-              <th>ジャンル</th>
-              <th>ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @items.each do |item| %>
-            <tr>
-              <td><%= item.id %></td>
-              <td><%= link_to item.name, admin_item_path(item.id) %></td>
-              <td><%= "#{item.price}円" %></td>
-              <td><%= item.genre.genre %></td>
-              <td><%= item.sale_status == 0 ? "売切れ" : "販売中" %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        
+    <% else %>
+    <%# 検索該当ありの場合 %>
+      <div class="col-sm-9">
+        <h3>商品一覧</h3>
+        <p><%="#{@q_items.total_count}件の商品を表示" %></p>
+        <%= render 'item_list', items: @q_items %>
+        <div class="row text-center">
+          <%= paginate @q_items, class: "paginate" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <%# 一覧表示の場合 %>
+  <div class="col-sm-9">
+    <h3>商品一覧</h3>
+    <p><%="#{@items.total_count}件の商品を表示" %></p>
+    <%= render 'item_list', items: @items %>
+    <div class="row text-center">
+      <%= paginate @items, class: "paginate" %>
     </div>
   </div>
+<% end %>

@@ -1,26 +1,40 @@
-<h3>注文履歴一覧</h3>
-
-<table class='table'>
-  <thead>
-    <tr>
-      <th>購入日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-    <tr>
-    	<td><%= link_to order.created_at.strftime('%Y/%m/%d/%H:%M:%S'), admin_order_path(order.id) %></td>
-        <td><%= order.member.last_name%><%= order.member.first_name%></td>
-        <td><%= order.order_items.sum(:quantity) %></td>
-        <td>
-          <%= order.order_status_i18n %>
-        </td>
-    </tr>
+<% if @q_orders %>
+  <div class="col-sm-3">
+    <h3>詳細検索</h3>
+    <h4><%= link_to "全注文履歴を表示", admin_orders_path(order: 'all') %></h4>
+    <%= render 'search', search: @search %>
+  </div>
+  <%# 検索該当なしの場合 %>
+  <div class="order-content">
+    <% if @q_orders.empty? %>
+      <div class="col-sm-9">
+        <h3>注文履歴一覧</h3>
+        <p class="top-empty-message">条件に合う注文が見つかりませんでした</p>
+      </div>
+    <% else %>
+      <%# 検索該当ありの場合 %>
+      <div class="col-sm-9">
+        <h3>注文履歴一覧</h3>
+        <p><%="#{@q_orders.total_count}件の注文を表示" %></p>
+        <%= render 'order_list', orders: @q_orders %>
+        <div class="row text-center">
+          <%= paginate @q_orders, class: "paginate" %>
+        </div>
+      </div>
     <% end %>
-
-  </tbody>
-</table>
+  </div>
+<% else %>
+  <div class="col-sm-3">
+    <h3>詳細検索</h3>
+    <h4><%= link_to "全注文履歴を表示", admin_orders_path(order: 'all') %></h4>
+  </div>
+  <%# 検索機能なしの場合 %>
+  <div class="col-sm-9">
+    <h3>注文履歴一覧</h3>
+    <p><%="#{@orders.total_count}件の注文を表示" %></p>
+    <%= render 'order_list', orders: @orders %>
+    <div class="row text-center">
+      <%= paginate @orders, class: "paginate" %>
+    </div>
+  </div>
+<% end %>

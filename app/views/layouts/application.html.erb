@@ -10,53 +10,62 @@
   </head>
 
   <body>
-    <!-- Header -->
-    <header class = "navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-          <%= link_to(public_top_path, class:"header-logo") do %>
-          
-          <nav class="nav navbar-nav navbar-left">
-              <%= image_tag 'Apple.jpg' %>
-          </nav>
+    <div class="wrapper">
+      <!-- Header -->
+      <header>
+        <div class="container">
+            <%= link_to(public_top_path, class:"header-logo") do %>
+            
+            <nav class="nav navbar-nav navbar-left">
+                <%= image_tag 'Apple.jpg' %>
+            </nav>
 
-          
-          
-          <% end %>
-        <ul class="nav navbar-nav navbar-right">
-          <% if admin_signed_in? %>
-            <li><%= link_to '商品一覧', admin_items_path %></li>
-            <li><%= link_to '会員一覧', admin_members_path %></li>
-            <li><%= link_to '注文履歴一覧', admin_orders_path(order: 'all') %></li>
-            <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
-            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+            
+            
+            <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <% if admin_signed_in? %>
+              <li><%= link_to '商品一覧', admin_items_path %></li>
+              <li><%= link_to '会員一覧', admin_members_path %></li>
+              <li><%= link_to '注文履歴一覧', admin_orders_path(order: 'all') %></li>
+              <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
 
-          <% elsif member_signed_in? %>
-            <li>ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！</li>
-            <li><%= link_to 'マイページ', public_mypage_path(current_member) %></li>
-            <li><%= link_to '商品一覧', public_items_path %></li>
-            <li><%= link_to 'カート', public_cart_items_path %></li>
-            <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
+            <% elsif member_signed_in? %>
+              <li>ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！</li>
+              <li><%= link_to 'マイページ', public_mypage_path(current_member) %></li>
+              <li><%= link_to '商品一覧', public_items_path %></li>
+              <li><%= link_to 'カート', public_cart_items_path %></li>
+              <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
 
-          <% else %>
-          　<li><%= link_to 'About', public_about_path %></li>
-            <li><%= link_to '商品一覧', public_items_path %></li>
-            <li><%= link_to '新規登録', new_member_registration_path %></li>
-            <li><%= link_to 'ログイン', new_member_session_path %></li>
-            <li><%= link_to 'ログイン（管理者）', new_admin_session_path %></li>
-          <% end %>
-        </ul>
+            <% else %>
+            　<li><%= link_to 'About', public_about_path %></li>
+              <li><%= link_to '商品一覧', public_items_path %></li>
+              <li><%= link_to '新規登録', new_member_registration_path %></li>
+              <li><%= link_to 'ログイン', new_member_session_path %></li>
+              <li><%= link_to 'ログイン（管理者）', new_admin_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <div class='body'>
+        <div class='container'>
+
+          <p id="notice"><%= notice %></p>
+
+          <%= yield %>
+        </div>
       </div>
-    </header>
 
-    <!-- Main -->
-    <div class='body'>
-      <div class='container'>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container text-center mt-3">
+          <p>©NaganoCake by 焼きApple</p>
+        </div>
+      </footer>
 
-        <p id="notice"><%= notice %></p>
-
-        <%= yield %>
-      </div>
     </div>
-
   </body>
 </html>
