@@ -14,12 +14,13 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require rails-ujs
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
 
 $(function() {
-	$(window).on('load', () => {
+	$(document).on('turbolinks:load', () => {
 		// 住所自動入力機能
 		$('#member_postal_code').jpostal({
 			postcode : [
@@ -57,6 +58,13 @@ $(function() {
 	    }
 	    reader.readAsDataURL(e.target.files[0]); //取得したurlにアップロード画像のurlを挿入
 		});
+
+		// トップ・おすすめ
+		$('.slider').bxSlider({
+	        auto: true,
+	        pause: 5000,
+	        touchEnabled:false,
+	    });
 	});
 });
 
