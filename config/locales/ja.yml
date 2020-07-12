@@ -1,4 +1,19 @@
 ja:
+  activerecord:
+    attributes:
+      item:
+        genre: ジャンル
+        name: 商品名
+        introduction: 商品説明
+        price: 税抜価格
+        sale_status: 販売ステータス
+      genre:
+        genre: ジャンル名
+        invalid_status: ステータス
+      delivery:
+        postal_code: 郵便番号
+        address: 住所
+        name: 宛名
   enums:
     order:
       order_status:

@@ -14,7 +14,7 @@
 		<%= f.label :"郵便番号(ハイフンなし)" %>
 		<%= f.text_field :postal_code %><br>
 		<%= f.label :"住所" %>
-		<%= f.text_field :address, :size => "80*30" %><br>
+		<%= f.text_field :address, :size => "80*30", collection: JpPrefecture::Prefecture.all, :value_method => :name %><br>
 		<%= f.label :"宛名" %>
 		<%= f.text_field :name %>
 		<%= f.submit '登録する', class: "btn btn-success" %>

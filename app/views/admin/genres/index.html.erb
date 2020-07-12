@@ -6,15 +6,17 @@
 
 			<!-- error-message -->
 			<% if @genre.errors.any? %>
-				<div class="error_explanation genre-error">
-					<h2><%= @genre.errors.count %> errors prohibited this obj from being saved:</h2>
-					<ul>
-						<% @genre.errors.full_messages.each do |message| %>
-							<li><%= message %></li>
-						<% end %>
-					</ul>
-				</div>
-			<% end %>
+			<h4 class="errors-message">
+				記入されてない箇所があります。
+		    </h4>
+		    <div id ="error_explanation" class="alert alert-danger">
+		    	<ul>
+		    		<% @genre.errors.full_messages.each do |message| %>
+		    		<li><%= message %></li>
+		    		<% end %>
+		    	</ul>
+		    </div>
+		    <% end %>
 
 			<!-- new genre form -->
 			<div class="new-genre-form">
@@ -53,6 +55,7 @@
 						<td><%= link_to '編集', edit_admin_genre_path(genre.id), class:"btn btn-succes" %></td>
 					</tr>
 					<% end %>
+					<%= paginate @genres %>
 				</tbody>
 			</table>
 		</div>

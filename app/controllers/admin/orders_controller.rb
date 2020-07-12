@@ -14,7 +14,7 @@ class Admin::OrdersController < ApplicationController
 			@orders = @member.orders.all
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
-			@orders = Order.all
+			@orders = Order.page(params[:page]).reverse_order
 		end
 	end
 
@@ -39,7 +39,7 @@ class Admin::OrdersController < ApplicationController
 					order_item.update(product_status: 1)
 				end
 			end
-			redirect_to admin_order_path(@order.id)
+			redirect_to admin_order_path(@order.id), notice:'ステータスを更新しました'
 		end
 	end
 

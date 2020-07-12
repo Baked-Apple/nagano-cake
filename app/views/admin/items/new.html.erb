@@ -3,7 +3,7 @@
     <div class="col-xs-10 col-xs-offset-1">
       <% if @item.errors.any? %>
       <h4 class="errors-message">
-        項目が記入されてない箇所があります。
+        記入されてない箇所があります。
       </h4>
       <div id ="error_explanation" class="alert alert-danger">
         <ul>
@@ -16,13 +16,11 @@
       <div class="row">
         <%= form_for(@item, url: admin_items_path) do |f| %>
         <div class="col-xs-5">
-          <h2>商品登録画面</h2>
-          <div class="product-new-form">
-            <%= f.attachment_field :image %>
-          </div>
+          <h3>商品登録画面</h3>
           <div class="product-img">
-            <%= image_tag 'no-image.png', id: "file-preview", :size => '350x300' %>
+            <%= attachment_image_tag(@item, :image, size:"350x300", fallback: "no-image.png") %>
           </div>
+          <%= f.attachment_field :image %>
         </div>
         <div class="col-xs-5 col-xs-offset-2">
           <table class="new-form-table">

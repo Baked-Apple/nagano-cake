@@ -2,13 +2,11 @@ class Admin::ItemsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@items = Item.all
+		@items = Item.page(params[:page])
 	end
 
 	def show
 		@item = Item.find(params[:id])
-		
-		
 	end
 
 	def new

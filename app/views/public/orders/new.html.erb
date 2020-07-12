@@ -1,5 +1,4 @@
 <div class="row">
-	
 	<h3>注文情報入力</h3>
 
 	<%= form_with model: @order, url: public_orders_confirm_path, method: :get, local: true do |f| %>
@@ -36,11 +35,10 @@
 			<p>郵便番号(ハイフンなし)</p>
 			<%= f.text_field :postal_code, class: "form-control" %><br>
 			<p>住所</p>
-			<%= f.text_field :address, class: "form-control" %><br>
+			<%= f.text_field :address, class: "form-control", collection: JpPrefecture::Prefecture.all, :value_method => :name %><br>
 			<p>宛名</p>
 			<%= f.text_field :delivery_name, class: "form-control" %><br>
 		</div>
-	
 	</div>
 
 	<div class="col-xs-4">
@@ -48,7 +46,6 @@
 			<%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
 		</div>
 	</div>
-		
 	<% end %>
 
 </div>
