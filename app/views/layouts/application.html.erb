@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
@@ -31,20 +32,22 @@
               <li><%= link_to '注文履歴一覧', admin_orders_path(order: 'all') %></li>
               <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
               <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+              <li><i class="fab fa-instagram fa-2x icon"></i></li>
 
             <% elsif member_signed_in? %>
               <li>ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！</li>
-              <li><%= link_to 'マイページ', public_mypage_path(current_member) %></li>
+              <li><%= link_to 'マイページ', public_mypage_path(current_member),class: 'glyphicon glyphicon-home home' %></li>
               <li><%= link_to '商品一覧', public_items_path %></li>
-              <li><%= link_to 'カート', public_cart_items_path %></li>
+              <li><%= link_to 'カート', public_cart_items_path,class: 'glyphicon glyphicon-shopping-cart' %></li>
               <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete %></li>
+              <span><i class="fab fa-instagram fa-2x icon"></i></span>
 
             <% else %>
             　<li><%= link_to 'About', public_about_path %></li>
               <li><%= link_to '商品一覧', public_items_path %></li>
               <li><%= link_to '新規登録', new_member_registration_path %></li>
               <li><%= link_to 'ログイン', new_member_session_path %></li>
-              <li><%= link_to 'ログイン（管理者）', new_admin_session_path %></li>
+              <li><i class="fab fa-instagram fa-2x icon"></i></li>
             <% end %>
           </ul>
         </div>
@@ -62,9 +65,23 @@
 
       <!-- Footer -->
       <footer class="footer">
-        <div class="container text-center mt-3">
-          <p>©NaganoCake by 焼きApple</p>
-        </div>
+        <% if admin_signed_in? %>
+          <%= link_to admin_top_path do %>
+          <div class="container text-center mt-3">
+            <p>©NaganoCake by 焼きApple</p>
+          </div>
+          <% end %>
+        <% elsif member_signed_in? %>
+          <div class="container text-center mt-3">
+            <p>©NaganoCake by 焼きApple</p>
+          </div>
+        <% else %>
+          <%= link_to new_admin_session_path do %>
+          <div class="container text-center mt-3">
+            <p>©NaganoCake by 焼きApple</p>
+          </div>
+          <% end %>
+        <% end %>
       </footer>
 
     </div>

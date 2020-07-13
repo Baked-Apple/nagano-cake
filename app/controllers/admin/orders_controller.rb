@@ -6,21 +6,20 @@ class Admin::OrdersController < ApplicationController
 		case params[:order]
 		# 本日の注文一覧（admin/topから）
 		when 'today'
-			@orders = Order.page(params[:page]).where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+			@orders = Order.page(params[:page]).reverse_order.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
 		#会員の注文履歴一覧（会員のマイページから)
 		when 'member'
 			member_id = Rails.application.routes.recognize_path(request.referer)[:id]
 			@member = Member.find(member_id)
-			@orders = @member.orders.page(params[:page])
+			@orders = @member.orders.page(params[:page]).reverse_order
 		#admin/注文履歴一覧（ヘッダーから）
 		when 'all'
-
-      @orders = Order.page(params[:page]).reverse_order
-			# 検索オブジェクト
-				@search = Order.ransack(params[:q])
-				# 検索結果
-				@q_orders = @search.result.page(params[:page])
-    end
+		    @orders = Order.page(params[:page]).reverse_order
+		    # 検索オブジェクト
+			@search = Order.ransack(params[:q])
+			# 検索結果
+			@q_orders = @search.result.page(params[:page]).reverse_order
+		end
 	end
 
 

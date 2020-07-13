@@ -9,25 +9,25 @@ class ApplicationController < ActionController::Base
 		elsif member_signed_in?
 			root_path
 		end
-    end
-  
+  end
+
   #sign out後トップページへ
   def after_sign_out_path_for(resource)
-    	# 会員ログアウト後　＝＞　トップ画面
-    	if resource == :member
-    		root_path
-    	# 管理者ログアウト後　＝＞　ログイン画面
-    	elsif resource == :admin
-    		admin_session_path
-    	end
+  	# 会員ログアウト後　＝＞　トップ画面
+  	if resource == :member
+  		root_path
+  	# 管理者ログアウト後　＝＞　ログイン画面
+  	elsif resource == :admin
+  		admin_session_path
+  	end
   end
- 
-    def set_search_item
-      # 検索バー表示の @q
-      @q = Item.ransack(params[:q])
-    end
 
-    protected
+  def set_search_item
+    # 検索バー表示の @q
+    @q = Item.ransack(params[:q])
+  end
+
+  protected
 	def configure_permitted_parameters
 		#signup/ユーザー登録情報
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :kana_last_name, :kana_first_name, :postal_code, :address, :phone_number, :email, :leave_status])
