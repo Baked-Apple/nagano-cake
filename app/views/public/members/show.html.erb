@@ -1,9 +1,9 @@
 <h3>マイページ</h3>
 
 <div>
-	<h4 class="col-xs-2">登録情報</h4>
-	<%= link_to '編集する', public_mypage_edit_path(current_member),class:"btn btn-primary col-xs-5" %>
-	<%= link_to 'パスワードを変更する', edit_member_registration_path(current_member),class:"btn btn-primary col-xs-5" %>
+	<h4 class="col-xs-3">登録情報</h4>
+	<%= link_to '編集する', public_mypage_edit_path(current_member), class:"data-disable-with", class:"btn btn-default col-xs-4" %>
+	<%= link_to 'パスワードを変更する', edit_member_registration_path(current_member), class:"data-disable-with", class:"btn btn-default col-xs-4" %>
 </div>
 
 <table class='table'>
