@@ -23,9 +23,9 @@
 				<%= form_for [:admin, @genre] do |f| %>
 					<%= f.label :genre, "ジャンル" %>
 					<%= f.text_field :genre %>
-					<%= f.radio_button :invalid_status, "有効", checked: true %>
+					<%= f.radio_button :invalid_status, 0, checked: true %>
 					<%= f.label :genre, "有効" %>
-					<%= f.radio_button :invalid_status, "無効" %>
+					<%= f.radio_button :invalid_status, 1 %>
 					<%= f.label :name, "無効" %>
 					<%= f.submit '追加', class:"btn btn-primary" %>
 				<% end %>
@@ -55,9 +55,11 @@
 						<td><%= link_to '編集', edit_admin_genre_path(genre.id), class:"btn btn-succes" %></td>
 					</tr>
 					<% end %>
-					<%= paginate @genres %>
+					
 				</tbody>
+				
 			</table>
+			<%= paginate @genres %>
 		</div>
 	</div>
 </div>
