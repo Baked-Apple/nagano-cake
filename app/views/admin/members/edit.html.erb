@@ -3,45 +3,45 @@
 <%= form_for(@member, url: admin_member_path) do |f| %>
 
   <div class="form-group">
-    <%= f.label :顧客ID, class: "col-xs-4" %>
+    <%= f.label :顧客ID, class: "col-xs-2 control-label" %>
     <%= @member.id %>
   </div>
 
   <div class="form-group">
-    <%= f.label :氏名, class: "col-xs-4" %>
+    <%= f.label :氏名, class: "col-xs-2 control-label" %>
     <%= f.text_field :last_name, autofocus: true %>
     <%= f.text_field :first_name, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :フリガナ, class: "col-xs-4" %>
+    <%= f.label :フリガナ, class: "col-xs-2 control-label" %>
     <%= f.text_field :kana_last_name, autofocus: true %>
     <%= f.text_field :kana_first_name, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :郵便番号, class: "col-xs-4" %>
+    <%= f.label :郵便番号, class: "col-xs-2 control-label" %>
     <%= f.text_field :postal_code, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :住所, class: "col-xs-4" %>
-    <%= f.text_field :address, autofocus: true, collection: JpPrefecture::Prefecture.all, :value_method => :name %>
+    <%= f.label :住所, class: "col-xs-2 control-label" %>
+    <%= f.text_field :address, autofocus: true, collection: JpPrefecture::Prefecture.all, :value_method => :name, class: "size-input" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :電話番号, class: "col-xs-4" %>
+    <%= f.label :電話番号, class: "col-xs-2 control-label" %>
     <%= f.text_field :phone_number, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.label :メールアドレス, class: "col-xs-4" %>
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.label :メールアドレス, class: "col-xs-2 control-label" %>
+    <%= f.email_field :email, autofocus: true, class: "size-input" %>
   </div>
 
   <!-- ステータス：1 = 退会済み 0 = 有効 -->
   <div class="form-group">
-    <%= f.label :会員ステータス, class: "col-xs-4" %>
+    <%= f.label :会員ステータス, class: "col-xs-2 control-label" %>
     <%= f.radio_button :leave_status, 0 %>
     <%= f.label :leave_status, "有効", {value: :leave_status, style: "display: inline-block;"} %>
     <%= f.radio_button :leave_status, 1 %>
@@ -49,6 +49,6 @@
   </div>
 
   <div class="actions row">
-      <%= f.submit '変更を保存する',　class:"data-disable-with" %>
+      <%= f.submit '変更を保存する',　class:"data-disable-with", class: "btn btn-success" %>
   </div>
 <% end %>
