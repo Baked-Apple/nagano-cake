@@ -20,7 +20,7 @@
 		<div class="field">
 			<%= f.radio_button :delivery_info, "self_addr", checked: true %>
 			<%= f.label :delivery_info, :ご自身の住所 %><br>
-			<p><%= "〒#{current_member.postal_code.insert(3, "-")} #{current_member.address} #{current_member.last_name} #{current_member.first_name}" %></p>
+			<u><p><%= "〒#{current_member.postal_code.insert(3, "-")} #{current_member.address} #{current_member.last_name} #{current_member.first_name}" %></p></u>
 		</div>
 
 		<div class="field">

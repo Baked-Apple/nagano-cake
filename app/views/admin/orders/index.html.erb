@@ -31,7 +31,7 @@
   <%# 検索機能なしの場合 %>
   <div class="col-sm-9">
     <h3>注文履歴一覧</h3>
-    <p><%="#{@orders.total_count}件の注文を表示" %></p>
+    <p><%="本日の注文 #{@orders.total_count}件を表示" %></p>
     <%= render 'order_list', orders: @orders %>
     <div class="row text-center">
       <%= paginate @orders, class: "paginate" %>
