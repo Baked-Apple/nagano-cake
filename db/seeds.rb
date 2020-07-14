@@ -12,3 +12,14 @@ Admin.create(
 	)
 
 Genre.create([{genre: "ケーキ",invalid_status: 0,}, {genre: "プリン",invalid_status: 0,}, {genre: "焼き菓子",invalid_status: 0,}, {genre: "キャンディ",invalid_status: 0,}])
+
+Item.create([
+	{genre_id: 1, name: "ティラミス", introduction: "当店おすすめ", price: 400, sale_status: 1,},
+	{genre_id: 1, name: "モンブラン", introduction: "当店おすすめ", price: 400, sale_status: 1,},
+	{genre_id: 2, name: "焼きプリン", introduction: "当店おすすめ", price: 300, sale_status: 1,},
+	{genre_id: 2, name: "いちごプリン", introduction: "当店おすすめ", price: 300, sale_status: 1,},
+	{genre_id: 3, name: "バタークッキー", introduction: "当店おすすめ", price: 200, sale_status: 1,},
+	{genre_id: 3, name: "チョコチップクッキー", introduction: "当店おすすめ", price: 200, sale_status: 1,},
+	{genre_id: 4, name: "ミルクキャンディ", introduction: "当店おすすめ", price: 200, sale_status: 1,},
+	{genre_id: 4, name: "フルーツキャンディ", introduction: "当店おすすめ", price: 200, sale_status: 1,},
+])
