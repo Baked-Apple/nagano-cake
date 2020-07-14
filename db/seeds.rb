@@ -6,9 +6,54 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# 管理者
 Admin.create(
 	email: "admin@mail",
 	password: "adminadmin"
 	)
 
+# ジャンル
 Genre.create([{genre: "ケーキ",invalid_status: 0,}, {genre: "プリン",invalid_status: 0,}, {genre: "焼き菓子",invalid_status: 0,}, {genre: "キャンディ",invalid_status: 0,}])
+
+
+# 商品
+# Item.create!(
+# 	[
+# 		{
+# 			genre_id: 1,
+# 			name: "チョコケーキ",
+# 			introduction: "チョコのショートケーキ",
+# 			price: 500,
+# 			sale_status: 1,
+# 			image: open("./db/images/chocolate_cake.jpg")
+# 		},
+# 		{
+# 			genre_id: 2,
+# 			name: "普通のプリン",
+# 			introduction: "シンプルなプリン",
+# 			price: 500,
+# 			sale_status: 1,
+# 			image: open("./db/images/プリン.jpg")
+# 		},
+# 		{
+# 			genre_id: 3,
+# 			name: "クッキーの詰め合わせ",
+# 			introduction: "長野ケーキオリジナル",
+# 			price: 500,
+# 			sale_status: 1,
+# 			image: open("./db/images/cookie_mix.jpg")
+# 		},
+# 		{
+# 			genre_id: 4,
+# 			name: "りんご飴",
+# 			introduction: "長野県産りんごを使った贅沢りんご飴",
+# 			price: 500,
+# 			sale_status: 1,
+# 			image: open("./db/images/apple_candy.jpg")
+# 		}
+# 	]
+# )
+
+
+
+
