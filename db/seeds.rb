@@ -27,9 +27,9 @@ Item.create([
 	{genre_id: 1, name: "ショートケーキ", introduction: "いちごのショートケーキ", price: 500, sale_status: 1, image: open("./db/images/cake.jpg")},
 	{genre_id: 2, name: "プリン", introduction: "普通のプリン", price: 300, sale_status: 1, image: open("./db/images/pudding.jpg")},
 	{genre_id: 3, name: "ごろっとアップルパイ", introduction: "りんごの甘い香りと香ばしいパイ生地が特徴です。", price: 300, sale_status: 1, image: open("./db/images/ごろっとりんごのアップルパイ.jpg")},
-	{genre_id: 3, name: "ロールケーキ", introduction: "ロールケーキ", price: 500, sale_status: 1, image: open("./db/images/ロールケーキ.jpg")},
+	{genre_id: 1, name: "ロールケーキ", introduction: "ロールケーキ", price: 500, sale_status: 1, image: open("./db/images/ロールケーキ.jpg")},
 	{genre_id: 1, name: "チーズケーキ", introduction: "人生最高」のチーズケーキ。人の心に寄り添って、誰もが笑顔になれるお菓子。", price: 500, sale_status: 1, image: open("./db/images/チーズケーキ.jpg")},
-	{genre_id: 1, name: "マカロン", introduction: "フランスのパティシエが作っています。繊細でサクッとほどけるマカロンコックで、チョコレートそのものやピューレで作ったジャムをはさんでいます。華やかな色合いにもフランスのセンスが感じられ、まるで愛らしい小物のような魅力があります。", price: 600, sale_status: 1, image: open("./db/images/マカロン.jpg")},
-	{genre_id: 1, name: "りんご飴", introduction: "長野県産丸ごとりんごのあめ", price: 600, sale_status: 1, image: open("./db/images/apple_candy.jpg")},
+	{genre_id: 3, name: "マカロン", introduction: "フランスのパティシエが作っています。繊細でサクッとほどけるマカロンコックで、チョコレートそのものやピューレで作ったジャムをはさんでいます。華やかな色合いにもフランスのセンスが感じられ、まるで愛らしい小物のような魅力があります。", price: 600, sale_status: 1, image: open("./db/images/マカロン.jpg")},
+	{genre_id: 4, name: "りんご飴", introduction: "長野県産丸ごとりんごのあめ", price: 600, sale_status: 1, image: open("./db/images/apple_candy.jpg")},
 	{genre_id: 1, name: "チョコレートケーキ", introduction: "チョコのケーキ", price: 600, sale_status: 1, image: open("./db/images/chocolate_cake.jpg")},
 ])
