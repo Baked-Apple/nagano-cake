@@ -37,9 +37,9 @@
             <% elsif member_signed_in? %>
               <li>ようこそ、<%= current_member.last_name %> <%= current_member.first_name %>さん！</li>
               <li><%= link_to 'マイページ', public_mypage_path(current_member), class: 'glyphicon glyphicon-home home' %></li>
-              <li><%= link_to '商品一覧', public_items_path, class:'glyphicon glyphicon-share-alt' %></li>
+              <li><%= link_to '商品一覧', public_items_path, class: 'glyphicon glyphicon-share-alt' %></li>
               <li><%= link_to "カート(#{current_member.cart_items.count})", public_cart_items_path, class: 'glyphicon glyphicon-shopping-cart' %></li>
-              <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class:'glyphicon glyphicon-log-in' %></li>
+              <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'glyphicon glyphicon-log-in' %></li>
               <li><i class="fab fa-instagram fa-2x icon"></i></li>
 
             <% else %>
